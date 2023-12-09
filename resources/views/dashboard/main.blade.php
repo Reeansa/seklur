@@ -1,137 +1,129 @@
 @extends('components.layout')
-
+@section('title', 'Dashboard')
 @section('content')
     <div class="grid grid-cols-12 w-full h-screen">
         @include('components.sidebar')
-        <div class="col-span-9 bg-slate-orange-200 p-5 space-y-20 bg-slate-200">
-            <div class="flex justify-between">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                    <path fill-rule="evenodd"
-                        d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
-                        clip-rule="evenodd" />
-                </svg>
-                <p class="font-semibold">Sistem Informasi Data Kependudukan Desa Bantarsoka</p>
-            </div>
-
+        <div class="col-span-9 p-5 space-y-20">
+            @include('components.header')
             <div class="grid grid-cols-4 gap-5">
-                <div class="text-center space-y-2 shadow-lg rounded-xl py-3">
+                <div class="text-center space-y-2 shadow-lg rounded-xl py-3 bg-white">
                     <div>
-                        <h1 class="text-4xl">0</h1>
+                        <h1 class="text-4xl jomolhari-text">{{ $penduduk }}</h1>
                         <p>Penduduk</p>
                     </div>
                     <div class="flex gap-2 justify-center text-xs items-center">
                         <p>Selengkapnya</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-                            <path fill-rule="evenodd"
-                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
-                                clip-rule="evenodd" />
+                        <svg width="16" height="16" viewBox="0 0 9 9" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 4.5C9 2.01483 6.98517 0 4.5 0C2.01483 0 0 2.01483 0 4.5C0 6.98517 2.01483 9 4.5 9C6.98517 9 9 6.98517 9 4.5ZM4.15385 6.23272L5.52938 4.84615H2.29327V4.15385H5.52938L4.15385 2.76728L4.64517 2.27964L6.84822 4.5L4.64495 6.72036L4.15385 6.23272Z"
+                                fill="#675F5F" />
                         </svg>
-
                     </div>
                 </div>
-                <div class="text-center space-y-2 shadow-lg rounded-xl py-3">
+                <div class="text-center space-y-2 shadow-lg rounded-xl py-3 bg-white">
                     <div>
-                        <h1 class="text-4xl">0</h1>
-                        <p>Penduduk</p>
+                        <h1 class="text-4xl jomolhari-text">0</h1>
+                        <p>Kartu Keluarga</p>
                     </div>
                     <div class="flex gap-2 justify-center text-xs items-center">
                         <p>Selengkapnya</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-                            <path fill-rule="evenodd"
-                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
-                                clip-rule="evenodd" />
+                        <svg width="16" height="16" viewBox="0 0 9 9" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 4.5C9 2.01483 6.98517 0 4.5 0C2.01483 0 0 2.01483 0 4.5C0 6.98517 2.01483 9 4.5 9C6.98517 9 9 6.98517 9 4.5ZM4.15385 6.23272L5.52938 4.84615H2.29327V4.15385H5.52938L4.15385 2.76728L4.64517 2.27964L6.84822 4.5L4.64495 6.72036L4.15385 6.23272Z"
+                                fill="#675F5F" />
                         </svg>
-
                     </div>
                 </div>
-                <div class="text-center space-y-2 shadow-lg rounded-xl py-3">
+                <div class="text-center space-y-2 shadow-lg rounded-xl py-3 bg-white">
                     <div>
-                        <h1 class="text-4xl">0</h1>
-                        <p>Penduduk</p>
+                        <h1 class="text-4xl jomolhari-text">0</h1>
+                        <p>Laki-Laki</p>
                     </div>
                     <div class="flex gap-2 justify-center text-xs items-center">
                         <p>Selengkapnya</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-                            <path fill-rule="evenodd"
-                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
-                                clip-rule="evenodd" />
+                        <svg width="16" height="16" viewBox="0 0 9 9" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 4.5C9 2.01483 6.98517 0 4.5 0C2.01483 0 0 2.01483 0 4.5C0 6.98517 2.01483 9 4.5 9C6.98517 9 9 6.98517 9 4.5ZM4.15385 6.23272L5.52938 4.84615H2.29327V4.15385H5.52938L4.15385 2.76728L4.64517 2.27964L6.84822 4.5L4.64495 6.72036L4.15385 6.23272Z"
+                                fill="#675F5F" />
                         </svg>
-
                     </div>
                 </div>
-                <div class="text-center space-y-2 shadow-lg rounded-xl py-3">
+                <div class="text-center space-y-2 shadow-lg rounded-xl py-3 bg-white">
                     <div>
-                        <h1 class="text-4xl">0</h1>
-                        <p>Penduduk</p>
+                        <h1 class="text-4xl jomolhari-text">0</h1>
+                        <p>Perempuan</p>
                     </div>
                     <div class="flex gap-2 justify-center text-xs items-center">
                         <p>Selengkapnya</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-                            <path fill-rule="evenodd"
-                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
-                                clip-rule="evenodd" />
+                        <svg width="16" height="16" viewBox="0 0 9 9" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 4.5C9 2.01483 6.98517 0 4.5 0C2.01483 0 0 2.01483 0 4.5C0 6.98517 2.01483 9 4.5 9C6.98517 9 9 6.98517 9 4.5ZM4.15385 6.23272L5.52938 4.84615H2.29327V4.15385H5.52938L4.15385 2.76728L4.64517 2.27964L6.84822 4.5L4.64495 6.72036L4.15385 6.23272Z"
+                                fill="#675F5F" />
                         </svg>
-
                     </div>
                 </div>
-                <div class="text-center space-y-2 shadow-lg rounded-xl py-3">
+                <div class="text-center space-y-2 shadow-lg rounded-xl py-3 bg-white">
                     <div>
-                        <h1 class="text-4xl">0</h1>
-                        <p>Penduduk</p>
+                        <h1 class="text-4xl jomolhari-text">0</h1>
+                        <p>Lahir</p>
                     </div>
                     <div class="flex gap-2 justify-center text-xs items-center">
                         <p>Selengkapnya</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-                            <path fill-rule="evenodd"
-                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
-                                clip-rule="evenodd" />
+                        <svg width="16" height="16" viewBox="0 0 9 9" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 4.5C9 2.01483 6.98517 0 4.5 0C2.01483 0 0 2.01483 0 4.5C0 6.98517 2.01483 9 4.5 9C6.98517 9 9 6.98517 9 4.5ZM4.15385 6.23272L5.52938 4.84615H2.29327V4.15385H5.52938L4.15385 2.76728L4.64517 2.27964L6.84822 4.5L4.64495 6.72036L4.15385 6.23272Z"
+                                fill="#675F5F" />
                         </svg>
-
                     </div>
                 </div>
-                <div class="text-center space-y-2 shadow-lg rounded-xl py-3">
+                <div class="text-center space-y-2 shadow-lg rounded-xl py-3 bg-white">
                     <div>
-                        <h1 class="text-4xl">0</h1>
-                        <p>Penduduk</p>
+                        <h1 class="text-4xl jomolhari-text">0</h1>
+                        <p>Meninggal</p>
                     </div>
                     <div class="flex gap-2 justify-center text-xs items-center">
                         <p>Selengkapnya</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-                            <path fill-rule="evenodd"
-                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
-                                clip-rule="evenodd" />
+                        <svg width="16" height="16" viewBox="0 0 9 9" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 4.5C9 2.01483 6.98517 0 4.5 0C2.01483 0 0 2.01483 0 4.5C0 6.98517 2.01483 9 4.5 9C6.98517 9 9 6.98517 9 4.5ZM4.15385 6.23272L5.52938 4.84615H2.29327V4.15385H5.52938L4.15385 2.76728L4.64517 2.27964L6.84822 4.5L4.64495 6.72036L4.15385 6.23272Z"
+                                fill="#675F5F" />
                         </svg>
-
                     </div>
                 </div>
-                <div class="text-center space-y-2 shadow-lg rounded-xl py-3">
+                <div class="text-center space-y-2 shadow-lg rounded-xl py-3 bg-white">
                     <div>
-                        <h1 class="text-4xl">0</h1>
-                        <p>Penduduk</p>
+                        <h1 class="text-4xl jomolhari-text">0</h1>
+                        <p>Pendatang</p>
                     </div>
                     <div class="flex gap-2 justify-center text-xs items-center">
                         <p>Selengkapnya</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-                            <path fill-rule="evenodd"
-                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
-                                clip-rule="evenodd" />
+                        <svg width="16" height="16" viewBox="0 0 9 9" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 4.5C9 2.01483 6.98517 0 4.5 0C2.01483 0 0 2.01483 0 4.5C0 6.98517 2.01483 9 4.5 9C6.98517 9 9 6.98517 9 4.5ZM4.15385 6.23272L5.52938 4.84615H2.29327V4.15385H5.52938L4.15385 2.76728L4.64517 2.27964L6.84822 4.5L4.64495 6.72036L4.15385 6.23272Z"
+                                fill="#675F5F" />
                         </svg>
-
                     </div>
                 </div>
-                <div class="text-center space-y-2 shadow-lg rounded-xl py-3">
+                <div class="text-center space-y-2 shadow-lg rounded-xl py-3 bg-white">
                     <div>
-                        <h1 class="text-4xl">0</h1>
-                        <p>Penduduk</p>
+                        <h1 class="text-4xl jomolhari-text">0</h1>
+                        <p>Pindah</p>
                     </div>
                     <div class="flex gap-2 justify-center text-xs items-center">
                         <p>Selengkapnya</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-                            <path fill-rule="evenodd"
-                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
-                                clip-rule="evenodd" />
+                        <svg width="16" height="16" viewBox="0 0 9 9" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 4.5C9 2.01483 6.98517 0 4.5 0C2.01483 0 0 2.01483 0 4.5C0 6.98517 2.01483 9 4.5 9C6.98517 9 9 6.98517 9 4.5ZM4.15385 6.23272L5.52938 4.84615H2.29327V4.15385H5.52938L4.15385 2.76728L4.64517 2.27964L6.84822 4.5L4.64495 6.72036L4.15385 6.23272Z"
+                                fill="#675F5F" />
                         </svg>
-
                     </div>
                 </div>
             </div>
