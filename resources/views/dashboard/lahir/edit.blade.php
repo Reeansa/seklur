@@ -5,8 +5,9 @@
         @include('components.sidebar')
         <div class="col-span-9 bg-slate-orange-200 p-5 space-y-20 bg-slate-200">
             @include('components.header')
-            <form class="space-y-5 bg-white rounded-xl" action="" method="POST">
+            <form class="space-y-5 bg-white rounded-xl" action="{{ route('data-lahir.update', $data_lahir->id) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="bg-[#4DA8CA] p-5 rounded-xl items-center flex gap-2 rounded-xl">
                     <svg width="30" height="30" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -21,14 +22,14 @@
                             fill="#675F5F" />
                     </svg>
 
-                    <h1 class="text-xl">Ubah Data</h1>
+                    <h1 class="text-xl">Tambah Data</h1>
                 </div>
                 <div class="p-5 space-y-5">
                     <div>
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Nama</p>
-                            <input name="nama" type="text" class="w-3/4 border border-black py-2 px-4" placeholder="Nama Bayi"
-                                value="{{ old('nama') }}">
+                            <input name="nama" type="text" class="w-3/4 border border-black py-2 px-4"
+                                placeholder="Nama Bayi" value="{{ $data_lahir->nama }}">
                         </div>
                         @error('nama')
                             <p class="text-red-500">{{ $message }}</p>
@@ -38,7 +39,7 @@
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Tanggal Lahir</p>
                             <input name="tanggal_lahir" type="date" class="w-3/4 border border-black py-2 px-4"
-                                value="{{ old('tanggal_lahir') }}">
+                                value="{{ $data_lahir->tanggal_lahir }}">
                         </div>
                         @error('tanggal_lahir')
                             <p class="text-red-500">{{ $message }}</p>
@@ -47,8 +48,14 @@
                     <div>
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Jenis Kelamin</p>
-                            <select name="jk" id="" class="w-3/4 border border-black py-2 px-4">
-                                <option selected class="hidden">-pilih-</option>
+                            <select name="jenis_kelamin" id="jenis_kelamin" class="w-3/4 border border-black py-2 px-4">
+                                <option selected value="{{ $data_lahir->jenis_kelamin }}">
+                                    @if ($data_lahir->jenis_kelamin == 'l')
+                                        Laki-Laki
+                                    @else
+                                        Perempuan
+                                    @endif
+                                </option>
                                 <option value="l">Laki-Laki</option>
                                 <option value="p">Perempuan</option>
                             </select>
@@ -56,9 +63,13 @@
                     </div>
                     <div>
                         <div class="flex gap-2 items-center w-full justify-between">
-                            <p>Provinsi</p>
-                            <select name="keluarga" id="" class="w-3/4 border border-black py-2 px-4"">
-                                <option value="" class="hidden">-pilih KK-</option>
+                            <p>Keluarga</p>
+                            <select name="kartu_keluarga_id" id="kartu_keluarga_id" class="w-3/4 border border-black py-2 px-4">
+                                <option class="hidden" value="{{ $data_lahir->kartu_keluarga_id }}">{{ $data_lahir->kartuKeluarga->kepala_keluarga }}</option>
+                                <option value="" disabled>-- pilih KK --</option>
+                                @foreach ($kartu_keluarga as $id => $kepala_keluarga )
+                                    <option class="@if ($id == $data_lahir->kartu_keluarga_id) hidden @endif" value="{{ $id }}">{{ $kepala_keluarga }}</option>
+                                @endforeach
                             </select>
                         </div>
                         @error('provinsi')
@@ -67,7 +78,7 @@
                     </div>
                     <div class="flex items-center gap-5">
                         <button type="submit" class="bg-[#4DA8CA] p-2 rounded-lg">Simpan</button>
-                        <a class="bg-black/20 p-2 rounded-lg" href="{{ route('data-lahir') }}">Batal</a>
+                        <a class="bg-black/20 p-2 rounded-lg" href="{{ route('data-lahir.index') }}">Batal</a>
                     </div>
                 </div>
             </form>

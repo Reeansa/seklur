@@ -5,7 +5,7 @@
         @include('components.sidebar')
         <div class="col-span-9 bg-slate-orange-200 p-5 space-y-20 bg-slate-200">
             @include('components.header')
-            <form class="space-y-5 bg-white rounded-xl" action="" method="POST">
+            <form class="space-y-5 bg-white rounded-xl" action="{{ route('data-pindah.store') }}" method="POST">
                 @csrf
                 <div class="bg-[#4DA8CA] p-5 rounded-xl items-center flex gap-2 rounded-xl">
                     <svg width="30" height="30" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,7 +28,10 @@
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Nama</p>
                             <select name="nama" id="nama" class="w-3/4 border border-black py-2 px-4">
-                                <option value="{{ old('nik') }}" class="hidden">-pilih penduduk-</option>
+                                <option value="{{ old('nama') }}" class="hidden">-pilih penduduk-</option>
+                                @foreach ($data as $id => $nama)
+                                    <option value="{{ $id }}">{{ $nama }}</option>
+                                @endforeach
                             </select>
                         </div>
                         @error('nama')
@@ -57,7 +60,7 @@
                     
                     <div class="flex items-center gap-5">
                         <button type="submit" class="bg-[#4DA8CA] p-2 rounded-lg">Simpan</button>
-                        <a class="bg-black/20 p-2 rounded-lg" href="{{ route('data-pindah') }}">Batal</a>
+                        <a class="bg-black/20 p-2 rounded-lg" href="{{ route('data-pindah.index') }}">Batal</a>
                     </div>
                 </div>
             </form>

@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('penduduks', function (Blueprint $table) {
             $table->id();
-            $table->string('nik')->unique();
+            $table->bigInteger('nik')->unique();
             $table->string('nama');
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
@@ -21,8 +21,6 @@ return new class extends Migration {
             $table->string('agama');
             $table->string('status_perkawinan');
             $table->string('pekerjaan');
-            $table->string('no_kk')->nullable();
-
             $table->timestamps();
         });
     }

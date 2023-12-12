@@ -56,7 +56,7 @@
                         </div>
                         <p>Data Penduduk</p>
                     </a>
-                    <a href="{{ route('data-kartu-keluarga') }}" class="flex gap-4 items-center">
+                    <a href="{{ route('data-kartu-keluarga.index') }}" class="flex gap-4 items-center">
                         <div
                             class="h-5 w-5 rounded-full {{ request()->is(['data-kartu-keluarga', 'data-kartu-keluarga/*']) ? 'bg-[#675F5F]' : 'border border-[#675F5F]' }}">
                         </div>
@@ -91,25 +91,25 @@
 
                 <div id="sirkulasi-penduduk-modal"
                     class="pl-6 space-y-4 {{ request()->is(['data-lahir', 'data-lahir/*', 'data-meninggal', 'data-meninggal/*', 'data-pendatang', 'data-pendatang/*', 'data-pindah', 'data-pindah/*']) ? '' : 'hidden' }}">
-                    <a href="{{ route('data-lahir') }}" class="flex gap-4 items-center">
+                    <a href="{{ route('data-lahir.index') }}" class="flex gap-4 items-center">
                         <div
                             class="h-5 w-5 rounded-full {{ request()->is(['data-lahir', 'data-lahir/*']) ? 'bg-[#675F5F]' : 'border border-[#675F5F]' }}">
                         </div>
                         <p>Data Lahir</p>
                     </a>
-                    <a href="{{ route('data-meninggal') }}" class="flex gap-4 items-center">
+                    <a href="{{ route('data-meninggal.index') }}" class="flex gap-4 items-center">
                         <div
                             class="h-5 w-5 rounded-full {{ request()->is(['data-meninggal', 'data-meninggal/*']) ? 'bg-[#675F5F]' : 'border border-[#675F5F]' }}">
                         </div>
                         <p>Data Meninggal</p>
                     </a>
-                    <a href="{{ route('data-pendatang') }}" class="flex gap-4 items-center">
+                    <a href="{{ route('data-pendatang.index') }}" class="flex gap-4 items-center">
                         <div
                             class="h-5 w-5 rounded-full {{ request()->is(['data-pendatang', 'data-pendatang/*']) ? 'bg-[#675F5F]' : 'border border-[#675F5F]' }}">
                         </div>
                         <p>Data Pendatang</p>
                     </a>
-                    <a href="{{ route('data-pindah') }}" class="flex gap-4 items-center">
+                    <a href="{{ route('data-pindah.index') }}" class="flex gap-4 items-center">
                         <div
                             class="h-5 w-5 rounded-full {{ request()->is(['data-pindah', 'data-pindah/*']) ? 'bg-[#675F5F]' : 'border border-[#675F5F]' }}">
                         </div>

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Pendatang;
 use App\Http\Requests\StorePendatangRequest;
 use App\Http\Requests\UpdatePendatangRequest;
+use App\Models\Penduduk;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class PendatangController extends Controller
 {
@@ -13,7 +16,8 @@ class PendatangController extends Controller
      */
     public function index()
     {
-        return view( 'dashboard.pendatang.index' );
+        $data = Pendatang::paginate( 10 );
+        return view( 'dashboard.pendatang.index', compact( 'data' ) );
     }
 
     /**
@@ -21,21 +25,40 @@ class PendatangController extends Controller
      */
     public function create()
     {
-        return view( 'dashboard.pendatang.create' );
+        $data = Penduduk::pluck('nama', 'id');
+        return view( 'dashboard.pendatang.create', compact('data') );
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePendatangRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate( [
+            'nik' => ['required', 'unique:pendatangs,nik' ],
+            'nama' => ['required'],
+            'jk' => ['required'],
+            'tanggal_datang' => ['required'],
+            'pelapor' => ['required'],
+        ] );
+
+        $data = [
+            'nik' => $request->nik,
+            'nama' => $request->nama,
+            'jk' => $request->jk,
+            'tanggal_datang' => $request->tanggal_datang,
+            'penduduk_id' => $request->pelapor,
+        ];
+
+        Pendatang::create( $data );
+
+        return redirect()->route( 'data-pendatang.index' )->with( 'success', 'Data berhasil ditambahkan' );
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Pendatang $pendatang)
+    public function show(Pendatang $data_pendatang)
     {
         //
     }
@@ -43,24 +66,47 @@ class PendatangController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pendatang $pendatang)
+    public function edit(Pendatang $data_pendatang)
     {
-        return view( 'dashboard.pendatang.edit' );
+        $data = [ 
+            'data_pendatang' => $data_pendatang,
+            'data_penduduk'  => Penduduk::pluck( 'nama', 'id' ),
+        ];
+        return view( 'dashboard.pendatang.edit', $data );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePendatangRequest $request, Pendatang $pendatang)
+    public function update(Request $request, Pendatang $data_pendatang)
     {
-        //
+        $request->validate( [
+            'nik' => ['required'],
+            'nama' => ['required'],
+            'jk' => ['required'],
+            'tanggal_datang' => ['required'],
+            'pelapor' => ['required'],
+        ] );
+
+        $data = [
+            'nik' => $request->nik,
+            'nama' => $request->nama,
+            'jk' => $request->jk,
+            'tanggal_datang' => $request->tanggal_datang,
+            'penduduk_id' => $request->pelapor,
+        ];
+
+        $data_pendatang->update( $data );
+
+        return redirect()->route( 'data-pendatang.index' )->with( 'success', 'Data berhasil diubah' );
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pendatang $pendatang)
+    public function destroy(Pendatang $data_pendatang): RedirectResponse
     {
-        //
+        $data_pendatang->delete();
+        return redirect()->route( 'data-pendatang.index' )->with( 'success', 'Data berhasil dihapus' );
     }
 }

@@ -17,7 +17,7 @@ class PendudukFactory extends Factory
     public function definition(): array
     {
         return [
-            'nik' => fake()->unique()->numerify('################'),
+            'nik' => fake()->unique()->numerify('##'),
             'nama' => fake()->name(),
             'tempat_lahir' => fake()->city(),
             'tanggal_lahir' => fake()->date(),

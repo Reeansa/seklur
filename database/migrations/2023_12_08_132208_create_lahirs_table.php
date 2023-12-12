@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('nama');
             $table->date('tanggal_lahir');
             $table->enum('jenis_kelamin', ['l', 'p']);
-            $table->string('keluarga');
             $table->timestamps();
+
+            $table->foreignId( 'kartu_keluarga_id' )->references( 'id' )->on( 'kartu_keluargas' )->onUpdate( 'cascade' )->onDelete( 'cascade' );
         });
     }
 

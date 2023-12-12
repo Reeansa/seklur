@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('pendatangs', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('nik')->unique();
+            $table->string('nama');
+            $table->string('jk');
+            $table->date( 'tanggal_datang' );
             $table->timestamps();
+
+            $table->foreignId('penduduk_id')->references('id')->on('penduduks')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

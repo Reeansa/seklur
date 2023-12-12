@@ -47,12 +47,13 @@
                         <p>Tambah Data</p>
                     </a>
 
-                    <div class="flex justify-end">
+                    <form action="{{ route('data-kartu-keluarga.index') }}" class="flex justify-end">
                         <div class="flex gap-2">
                             <p>Search:</p>
-                            <input type="text" class="border border-black rounded-sm">
+                            <input type="text" name="search" class="border border-black rounded-sm"
+                                value="{{ request('search') }}">
                         </div>
-                    </div>
+                    </form>
                     <div class="flex flex-col">
                         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
@@ -86,7 +87,7 @@
                                                 <tr class="border-b dark:border-neutral-500">
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 font-medium dark:border-neutral-500">
-                                                        1
+                                                        {{ $loop->iteration + $data->firstItem() - 1 }}
                                                     </td>
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
@@ -94,7 +95,7 @@
                                                     </td>
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                                                        {{ $d->kepala_keluarga }}
+                                                        {{ $d->penduduk->nama }}
                                                     </td>
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
@@ -102,7 +103,7 @@
                                                     </td>
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                                                        <a href="{{ route('data-kartu-keluarga.anggota', $d->id) }}">
+                                                        <a href="{{ route('data-kartu-keluarga.anggota-kk', $d->id) }}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="#675F5F"
                                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="#675F5F"
                                                                 class="w-6 h-6">
@@ -115,8 +116,8 @@
                                                         class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500 flex gap-3 justify-center">
                                                         <a href={{ route('data-kartu-keluarga.edit', $d->id) }}
                                                             class="cursor-pointer">
-                                                            <svg class="w-6 h-6" viewBox="0 0 17 17"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <svg class="w-6 h-6" viewBox="0 0 17 17" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
                                                                 <path
                                                                     d="M15.4184 1.63342C15.3517 1.56033 15.2709 1.5015 15.1809 1.46048C15.0909 1.41946 14.9935 1.3971 14.8945 1.39474C14.7956 1.39238 14.6973 1.41008 14.6054 1.44676C14.5135 1.48344 14.43 1.53835 14.3599 1.60818L13.752 2.21414L14.7872 3.24676L15.3849 2.65209C15.5209 2.51946 15.6003 2.33937 15.6066 2.1495C15.6128 1.95963 15.5454 1.7747 15.4184 1.63342Z"
                                                                     fill="#675F5F" />
@@ -131,23 +132,26 @@
                                                                     fill="#675F5F" />
                                                             </svg>
                                                         </a>
-                                                        <a href="{{ route('data-kartu-keluarga.destroy', $d->id) }}"
-                                                            class="cursor-pointer">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                                class="w-6 h-6">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                                            </svg>
-
-                                                        </a>
+                                                        <form action="{{ route('data-kartu-keluarga.destroy', $d->id) }}"
+                                                            class="cursor-pointer" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                    fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                                    stroke="currentColor" class="w-6 h-6">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                                </svg></button>
+                                                        </form>
 
                                                     </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
-                                        {{ $data->links() }}
                                     </table>
+                                    <div class="mt-5">
+                                        {{ $data->links() }}
+                                    </div>
                                 </div>
                             </div>
                         </div>

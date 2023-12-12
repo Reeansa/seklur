@@ -50,7 +50,8 @@
                     <form action="{{ route('data-penduduk.index') }}" class="flex justify-end">
                         <div class="flex gap-2">
                             <p>Search:</p>
-                            <input type="text" name="search" class="border border-black rounded-sm" value="{{ request('search') }}">
+                            <input type="text" name="search" class="border border-black rounded-sm"
+                                value="{{ request('search') }}">
                         </div>
                     </form>
                     <div class="flex flex-col">
@@ -84,12 +85,11 @@
                                             </tr>
                                         </thead>
                                         <tbody class="bg-[#ECECEC]">
-                                            @php $no = 1; @endphp
                                             @foreach ($data as $d)
                                                 <tr class="border-b dark:border-neutral-500">
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 font-medium dark:border-neutral-500">
-                                                        {{ $d->id }}
+                                                        {{ $loop->iteration + $data->firstItem() - 1 }}
                                                     </td>
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
@@ -113,11 +113,17 @@
                                                     </td>
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                                                        {{ $d->no_kk }}
+                                                        @if ($d->kartuKeluarga)
+                                                            {{ $d->kartuKeluarga->no_kk }}
+                                                        @else
+                                                            Tidak Ada Kartu Keluarga
+                                                        @endif
+
                                                     </td>
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500 flex gap-3 justify-center">
-                                                        <a href="{{ route('data-penduduk.show', $d->id) }}" class="cursor-pointer">
+                                                        <a href="{{ route('data-penduduk.show', $d->id) }}"
+                                                            class="cursor-pointer">
                                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                                 fill="currentColor" class="w-4 h-4">
                                                                 <path fill-rule="evenodd"
@@ -152,7 +158,7 @@
                                         </tbody>
                                     </table>
                                     <div class="mt-5">
-                                        {{ $data->links() }}
+                                        {{ $data->appends(request()->except('page'))->links() }}
                                     </div>
                                 </div>
                             </div>

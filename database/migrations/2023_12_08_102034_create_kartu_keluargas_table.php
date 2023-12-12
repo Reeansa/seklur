@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('kartu_keluargas', function (Blueprint $table) {
             $table->id();
-            $table->string( 'no_kk' )->nullable();
-            $table->string( 'kepala_keluarga' )->nullable();
+            $table->bigInteger( 'no_kk' )->unique();
             $table->string( 'alamat' );
-            $table->string( 'anggota_kk' )->nullable();
+            $table->string( 'kecamatan' );
+            $table->string( 'kabupaten' );
+            $table->string( 'provinsi' );
             $table->timestamps();
+            
+            $table->bigInteger( 'nik' )->unique();
+            $table->foreign('nik')->references('nik')->on('penduduks')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

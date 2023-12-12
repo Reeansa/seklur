@@ -17,7 +17,12 @@ class KartuKeluargaFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'no_kk' => fake()->unique()->numerify('##'),
+            'kepala_keluarga' => fake()->name(),
+            'alamat' => fake()->address(),
+            'kecamatan' => fake()->city(),
+            'kabupaten' => fake()->city(),
+            'provinsi' => fake()->state(),
         ];
     }
 }

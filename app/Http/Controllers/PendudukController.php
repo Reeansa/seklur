@@ -16,7 +16,7 @@ class PendudukController extends Controller
         return view('dashboard.penduduk.index', compact('data'));
     }
 
-    public function create()
+    public function create(): View
     {
         return view('dashboard.penduduk.create');
     }

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Penduduk;
 use App\Models\Pindah;
 use App\Http\Requests\StorePindahRequest;
 use App\Http\Requests\UpdatePindahRequest;
+use Illuminate\Http\Request;
 
 class PindahController extends Controller
 {
@@ -13,7 +15,8 @@ class PindahController extends Controller
      */
     public function index()
     {
-        return view( 'dashboard.pindah.index' );
+        $data = Pindah::paginate( 10 );
+        return view( 'dashboard.pindah.index', compact( 'data' ) );
     }
 
     /**
@@ -21,15 +24,30 @@ class PindahController extends Controller
      */
     public function create()
     {
-        return view( 'dashboard.pindah.create' );
+        $data = Penduduk::pluck( 'nama', 'id' );
+        return view( 'dashboard.pindah.create', compact( 'data' ) );
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePindahRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate( [
+            'nama' => ['required'],
+            'tanggal_pindah' => ['required'],
+            'alasan' => ['required'],
+        ] );
+
+        $data = [
+            'penduduk_id' => $request->nama,
+            'tanggal_pindah' => $request->tanggal_pindah,
+            'alasan' => $request->alasan,
+        ];
+
+        Pindah::create( $data );
+
+        return redirect()->route( 'data-pindah.index' )->with( 'success', 'Data berhasil ditambahkan' );
     }
 
     /**

@@ -23,7 +23,7 @@
                 </div>
                 <div class="text-center space-y-2 shadow-lg rounded-xl py-3 bg-white">
                     <div>
-                        <h1 class="text-4xl jomolhari-text">0</h1>
+                        <h1 class="text-4xl jomolhari-text">{{ $kartu_keluarga }}</h1>
                         <p>Kartu Keluarga</p>
                     </div>
                     <div class="flex gap-2 justify-center text-xs items-center">
@@ -38,7 +38,7 @@
                 </div>
                 <div class="text-center space-y-2 shadow-lg rounded-xl py-3 bg-white">
                     <div>
-                        <h1 class="text-4xl jomolhari-text">0</h1>
+                        <h1 class="text-4xl jomolhari-text">{{ $laki_laki }}</h1>
                         <p>Laki-Laki</p>
                     </div>
                     <div class="flex gap-2 justify-center text-xs items-center">
@@ -53,7 +53,7 @@
                 </div>
                 <div class="text-center space-y-2 shadow-lg rounded-xl py-3 bg-white">
                     <div>
-                        <h1 class="text-4xl jomolhari-text">0</h1>
+                        <h1 class="text-4xl jomolhari-text">{{ $perempuan }}</h1>
                         <p>Perempuan</p>
                     </div>
                     <div class="flex gap-2 justify-center text-xs items-center">
@@ -68,7 +68,7 @@
                 </div>
                 <div class="text-center space-y-2 shadow-lg rounded-xl py-3 bg-white">
                     <div>
-                        <h1 class="text-4xl jomolhari-text">0</h1>
+                        <h1 class="text-4xl jomolhari-text">{{ $lahir }}</h1>
                         <p>Lahir</p>
                     </div>
                     <div class="flex gap-2 justify-center text-xs items-center">
@@ -83,7 +83,7 @@
                 </div>
                 <div class="text-center space-y-2 shadow-lg rounded-xl py-3 bg-white">
                     <div>
-                        <h1 class="text-4xl jomolhari-text">0</h1>
+                        <h1 class="text-4xl jomolhari-text">{{ $meninggal }}</h1>
                         <p>Meninggal</p>
                     </div>
                     <div class="flex gap-2 justify-center text-xs items-center">
@@ -98,7 +98,7 @@
                 </div>
                 <div class="text-center space-y-2 shadow-lg rounded-xl py-3 bg-white">
                     <div>
-                        <h1 class="text-4xl jomolhari-text">0</h1>
+                        <h1 class="text-4xl jomolhari-text">{{ $pendatang }}</h1>
                         <p>Pendatang</p>
                     </div>
                     <div class="flex gap-2 justify-center text-xs items-center">
@@ -113,7 +113,7 @@
                 </div>
                 <div class="text-center space-y-2 shadow-lg rounded-xl py-3 bg-white">
                     <div>
-                        <h1 class="text-4xl jomolhari-text">0</h1>
+                        <h1 class="text-4xl jomolhari-text">{{ $pindah }}</h1>
                         <p>Pindah</p>
                     </div>
                     <div class="flex gap-2 justify-center text-xs items-center">

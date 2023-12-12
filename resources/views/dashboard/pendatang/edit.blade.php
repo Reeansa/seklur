@@ -5,8 +5,9 @@
         @include('components.sidebar')
         <div class="col-span-9 bg-slate-orange-200 p-5 space-y-20 bg-slate-200">
             @include('components.header')
-            <form class="space-y-5 bg-white rounded-xl" action="" method="POST">
+            <form class="space-y-5 bg-white rounded-xl" action="{{ route('data-pendatang.update', $data_pendatang->id) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="bg-[#4DA8CA] p-5 rounded-xl items-center flex gap-2 rounded-xl">
                     <svg width="30" height="30" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -27,7 +28,8 @@
                     <div>
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>NIK</p>
-                            <input type="number" name="nik" id="nik" value="{{ old('nik') }}" class="w-3/4 border border-black py-2 px-4" disabled>
+                            <input type="hidden" name="nik" id="nik" value="{{ $data_pendatang->nik }}">
+                            <input type="number" name="nik" id="nik" value="{{ $data_pendatang->nik }}" class="w-3/4 border border-black py-2 px-4" disabled>
                         </div>
                         @error('nik')
                             <p class="text-red-500">{{ $message }}</p>
@@ -36,7 +38,7 @@
                     <div>
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Nama</p>
-                            <input type="text" name="nama" id="nama" value="{{ old('nama') }}" class="w-3/4 border border-black py-2 px-4">
+                            <input type="text" name="nama" id="nama" value="{{ $data_pendatang->nama }}" class="w-3/4 border border-black py-2 px-4">
                         </div>
                         @error('nama')
                             <p class="text-red-500">{{ $message }}</p>
@@ -46,7 +48,13 @@
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Jenis Kelamin</p>
                             <select name="jk" id="jk" class="w-3/4 border border-black py-2 px-4">
-                                <option value="" class="hidden" value="{{ old('jk') }}">-pilih-</option>
+                                <option selected value="{{ $data_pendatang->jk }}">
+                                    @if ($data_pendatang->jk == 'l')
+                                        Laki-Laki
+                                    @else
+                                        Perempuan
+                                    @endif
+                                </option>
                                 <option value="l">Laki-Laki</option>
                                 <option value="p">Perempuan</option>
                             </select>
@@ -59,7 +67,7 @@
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Tgl Datang</p>
                             <input name="tanggal_datang" type="date" class="w-3/4 border border-black py-2 px-4"
-                                value="{{ old('tanggal_datang') }}">
+                                value="{{ $data_pendatang->tanggal_datang }}">
                         </div>
                         @error('tanggal_datang')
                             <p class="text-red-500">{{ $message }}</p>
@@ -68,8 +76,12 @@
                     <div>
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Pelapor</p>
-                            <input name="pelapor" type="text" class="w-3/4 border border-black py-2 px-4"
-                                value="{{ old('pelapor') }}">
+                            <select name="pelapor" id="pelapor" class="w-3/4 border border-black py-2 px-4">
+                                <option class="hidden" value="{{ $data_pendatang->penduduk->id }}">{{$data_pendatang->penduduk->nama}}</option>
+                                @foreach ($data_penduduk as $id => $nama)
+                                    <option class="@if ($id == $data_pendatang->penduduk->id) hidden @endif" value="{{ $id }}">{{ $nama }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         @error('pelapor')
                             <p class="text-red-500">{{ $message }}</p>
@@ -78,7 +90,7 @@
                     
                     <div class="flex items-center gap-5">
                         <button type="submit" class="bg-[#4DA8CA] p-2 rounded-lg">Simpan</button>
-                        <a class="bg-black/20 p-2 rounded-lg" href="{{ route('data-pendatang') }}">Batal</a>
+                        <a class="bg-black/20 p-2 rounded-lg" href="{{ route('data-pendatang.index') }}">Batal</a>
                     </div>
                 </div>
             </form>

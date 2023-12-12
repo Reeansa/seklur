@@ -6,14 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Pendatang extends Model
+class AnggotaKeluarga extends Model
 {
     use HasFactory;
 
     protected $guarded = [ 'id' ];
 
-    public function penduduk():BelongsTo
-    {
+    public function kartuKeluarga(): BelongsTo {
+        return $this->belongsTo( KartuKeluarga::class );
+    }
+
+    public function penduduk(): BelongsTo {
         return $this->belongsTo( Penduduk::class );
     }
 }

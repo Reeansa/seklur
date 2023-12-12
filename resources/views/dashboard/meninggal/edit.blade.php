@@ -1,12 +1,13 @@
 @extends('components.layout')
-@section('title'. 'Ubah Data Meninggal')
+@section('title', 'Ubah Data Meninggal')
 @section('content')
     <div class="grid grid-cols-12 w-full h-screen">
         @include('components.sidebar')
         <div class="col-span-9 bg-slate-orange-200 p-5 space-y-20 bg-slate-200">
             @include('components.header')
-            <form class="space-y-5 bg-white rounded-xl" action="" method="POST">
+            <form class="space-y-5 bg-white rounded-xl" action="{{ route('data-meninggal.update', $data_meninggal->id) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="bg-[#4DA8CA] p-5 rounded-xl items-center flex gap-2 rounded-xl">
                     <svg width="30" height="30" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -27,7 +28,8 @@
                     <div>
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Nama</p>
-                            <input type="text" name="nama" id="nama" class="w-3/4 border border-black py-2 px-4" disabled>
+                            <input type="hidden" name="penduduk_id" value="{{ $data_meninggal->penduduk_id }}">
+                            <input type="text" name="nama" id="nama" class="w-3/4 border border-black py-2 px-4" value="{{ $data_meninggal->penduduk->nama }}" readonly>
                         </div>
                         @error('nama')
                             <p class="text-red-500">{{ $message }}</p>
@@ -37,7 +39,7 @@
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Tgl Meninggal dunia</p>
                             <input name="tanggal_kematian" type="date" class="w-3/4 border border-black py-2 px-4"
-                                value="{{ old('tanggal_kematian') }}">
+                                value="{{ $data_meninggal->tanggal }}">
                         </div>
                         @error('tanggal_kematian')
                             <p class="text-red-500">{{ $message }}</p>
@@ -47,7 +49,7 @@
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Penyebab</p>
                             <input name="penyebab" type="text" class="w-3/4 border border-black py-2 px-4"
-                                value="{{ old('penyebab') }}">
+                                value="{{ $data_meninggal->keterangan }}">
                         </div>
                         @error('penyebab')
                             <p class="text-red-500">{{ $message }}</p>
@@ -56,7 +58,7 @@
                     
                     <div class="flex items-center gap-5">
                         <button type="submit" class="bg-[#4DA8CA] p-2 rounded-lg">Simpan</button>
-                        <a class="bg-black/20 p-2 rounded-lg" href="{{ route('data-meninggal') }}">Batal</a>
+                        <a class="bg-black/20 p-2 rounded-lg" href="{{ route('data-meninggal.index') }}">Batal</a>
                     </div>
                 </div>
             </form>

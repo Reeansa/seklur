@@ -5,15 +5,6 @@
         @include('components.sidebar')
         <div class="col-span-9 bg-slate-orange-200 p-5 space-y-20 bg-slate-200">
             @include('components.header')
-            @if (session('success'))
-                <div class="absolute top-0 bg-green-300 text-green-700 rounded p-3">
-                    <h1> {{ session('success') }} </h1>
-                </div>
-            @elseif(session('error'))
-                <div class="absolute top-0 bg-red-300 text-red-700 rounded p-3">
-                    <h1> {{ session('error') }} </h1>
-                </div>
-            @endif
             <form class="space-y-5 bg-white rounded-xl" action="{{ route('data-kartu-keluarga.store') }}" method="POST">
                 @csrf
                 <div class="bg-[#4DA8CA] p-5 rounded-xl items-center flex gap-2 rounded-xl">
@@ -46,10 +37,14 @@
                     <div>
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Kepala Keluarga</p>
-                            <input name="nama" type="text" class="w-3/4 border border-black py-2 px-4"
-                                value="{{ old('nama') }}">
+                            <select name="kepala_keluarga" id="kepala_keluarga" class="w-3/4 border border-black py-2 px-4">
+                                <option value="" class="hidden">-Pilih KK-</option>
+                                @foreach ($penduduk as $p)
+                                    <option value="{{ $p->nik }}">{{ $p->nama }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        @error('nama')
+                        @error('kepala_keluarga')
                             <p class="text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
@@ -60,6 +55,16 @@
                                 value="{{ old('alamat') }}">
                         </div>
                         @error('alamat')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <div class="flex gap-2 items-center w-full justify-between">
+                            <p>Kecamatan</p>
+                            <input name="kecamatan" type="text" class="w-3/4 border border-black py-2 px-4"
+                                value="{{ old('kecamatan') }}">
+                        </div>
+                        @error('kecamatan')
                             <p class="text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
@@ -85,7 +90,7 @@
                     </div>
                     <div class="flex items-center gap-5">
                         <button type="submit" class="bg-[#4DA8CA] p-2 rounded-lg">Simpan</button>
-                        <a class="bg-black/20 p-2 rounded-lg" href="{{ route('data-kartu-keluarga') }}">Batal</a>
+                        <a class="bg-black/20 p-2 rounded-lg" href="{{ route('data-kartu-keluarga.index') }}">Batal</a>
                     </div>
                 </div>
             </form>
