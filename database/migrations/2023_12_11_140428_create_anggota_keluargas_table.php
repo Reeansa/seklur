@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('anggota_keluargas', function (Blueprint $table) {
             $table->id();
-            $table->string('hubungan_keluarga');
-            $table->string( 'alamat' );
+            $table->foreignId('penduduk_id')->references('id')->on('penduduks')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('kartu_keluarga_id')->references('id')->on('kartu_keluargas')->onUpdate('cascade')->onDelete('cascade');
+            $table->string( 'status' );
             $table->timestamps();
-            $table->foreignId('nik')->constrained('penduduks')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
