@@ -11,9 +11,9 @@
                         d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
                         clip-rule="evenodd" />
                 </svg>
-                <div>
-                    <p class="text-lg">Farah Zafirah</p>
-                    <p class="bg-green-600 text-xs w-min px-2 text-white rounded-2xl">Administrator</p>
+                <div class="text-center">
+                    <p class="text-lg">{{ auth()->user()->name }}</p>
+                    <p class="bg-green-600 text-xs px-2 text-white rounded-2xl">{{ auth()->user()->roles->kedudukan }}</p>
                 </div>
             </div>
             <a href="{{ route('dashboard') }}"
@@ -117,7 +117,8 @@
                     </a>
                 </div>
             </div>
-            <a href="{{ route('kelola-laporan') }}"
+            @if (auth()->user()->roles->kedudukan == 'administrator')
+                <a href="{{ route('kelola-laporan') }}"
                 class="flex items-center w-full gap-5 cursor-pointer {{ request()->is('kelola-laporan') ? 'active px-3' : 'px-5' }}">
                 <svg width="30" height="30" viewBox="0 0 15 15" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -137,11 +138,12 @@
                 </svg>
                 <p class="text-lg">Kelola Laporan</p>
             </a>
+            @endif
         </div>
 
         <div class="space-y-5">
-            <a href="{{ route('kelola-admin') }}"
-                class="flex items-center w-full gap-5 cursor-pointer {{ request()->is('kelola-admin') ? 'active px-3' : 'px-5' }}">
+            <a href="{{ route('data-admin.index') }}"
+                class="flex items-center w-full gap-5 cursor-pointer {{ request()->is('data-admin') ? 'active px-3' : 'px-5' }}">
                 <svg width="30" height="30" viewBox="0 0 16 16" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -159,7 +161,7 @@
 
                 <p class="text-lg">Kelola Admin</p>
             </a>
-            <div class="flex items-center w-full gap-5 cursor-pointer px-5">
+            <button id="tombol" class="flex items-center w-full gap-5 cursor-pointer px-5">
                 <svg width="30" height="30" viewBox="0 0 17 17" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -169,10 +171,20 @@
                 </svg>
 
                 <p class="text-lg">Logout</p>
-            </div>
+            </button>
         </div>
     </div>
 </div>
+<div id="logout-modal" class="absolute z-10 flex w-full pt-10 items-center justify-center" style="display: none;">
+    <div class="bg-white p-5 rounded shadow-md">
+        <h1 class="mb-10">Apakah anda yakin akan keluar?</h1>
+        <div class="flex gap-2 items-center justify-end">
+            <a class="bg-[#4DA8CA] py-1 px-4 text-white" href="{{ route('logout') }}">Ok</a>
+            <button id="cancel" class="text-[#4DA8CA]" href="">Cancel</button>
+        </div>
+    </div>
+</div>
+
 
 @push('scripts')
     <script>
@@ -188,6 +200,13 @@
             $("#kelola-laporan").click(function() {
                 $("#kelola-laporan-modal").toggleClass("hidden");
             });
+
+            $('#tombol').click(function(){
+				$('#logout-modal').fadeIn("slow");
+			});
+			$('#cancel').click(function(){
+				$('#logout-modal').fadeOut("slow");
+			});
         });
     </script>
 @endpush
