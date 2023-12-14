@@ -28,7 +28,7 @@
                     <h1 class="text-xl">Data User</h1>
                 </div>
                 <div class="p-5">
-                    <a href="{{ route('kelola-admin.create') }}"
+                    <a href="{{ route('data-admin.create') }}"
                         class="flex gap-1 items-center p-1 bg-[#4DA8CA] w-min rounded-lg whitespace-nowrap">
                         <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -47,12 +47,13 @@
                         <p>Tambah Data</p>
                     </a>
 
-                    <div class="flex justify-end">
+                    <form action="{{ route('data-admin.index') }}" class="flex justify-end">
                         <div class="flex gap-2">
                             <p>Search:</p>
-                            <input type="text" class="border border-black rounded-sm">
+                            <input type="text" name="search" class="border border-black rounded-sm"
+                                value="{{ request('search') }}">
                         </div>
-                    </div>
+                    </form>
                     <div class="flex flex-col">
                         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
@@ -78,51 +79,61 @@
                                             </tr>
                                         </thead>
                                         <tbody class="bg-[#ECECEC]">
+                                            @foreach ($data as $d)
                                                 <tr class="border-b dark:border-neutral-500">
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 font-medium dark:border-neutral-500">
-                                                        1
+                                                        {{ $loop->iteration + $data->firstItem() - 1 }}
                                                     </td>
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                                                        asdasdasd
+                                                        {{ $d->name }}
                                                     </td>
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                                                        asdasdasd
+                                                        {{ $d->username }}
                                                     </td>
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                                                        asdasdasd
+                                                        {{ $d->roles->kedudukan }}
                                                     </td>
                                                     <td
-                                                        class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500 flex gap-3 justify-center">
-                                                        <a href={{ route('kelola-admin.edit', 1) }}
+                                                        class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500 flex gap-3">
+                                                        <a href="{{ route('data-admin.edit', $d->id) }}"
                                                             class="cursor-pointer">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                                fill="currentColor" class="w-4 h-4">
+                                                            <svg class="w-6 h-6" viewBox="0 0 17 17" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
                                                                 <path
-                                                                    d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
+                                                                    d="M15.4184 1.63342C15.3517 1.56033 15.2709 1.5015 15.1809 1.46048C15.0909 1.41946 14.9935 1.3971 14.8945 1.39474C14.7956 1.39238 14.6973 1.41008 14.6054 1.44676C14.5135 1.48344 14.43 1.53835 14.3599 1.60818L13.752 2.21414L14.7872 3.24676L15.3849 2.65209C15.5209 2.51946 15.6003 2.33937 15.6066 2.1495C15.6128 1.95963 15.5454 1.7747 15.4184 1.63342Z"
+                                                                    fill="#675F5F" />
                                                                 <path
-                                                                    d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
+                                                                    d="M8.39242 11.1562H7.95182H6.90625H5.84375V10.0938V9.04818V8.60758L6.15586 8.29613L10.7425 3.71875H1.59375V15.4062H13.2812V6.25746L8.70387 10.8441L8.39242 11.1562Z"
+                                                                    fill="#675F5F" />
+                                                                <path
+                                                                    d="M13.2813 4.75322L14.3701 3.66217L13.3378 2.62988L12.2471 3.71861H13.2813V4.75322Z"
+                                                                    fill="#675F5F" />
+                                                                <path
+                                                                    d="M6.90625 10.0938H7.95182L13.2812 4.75336V3.71875H12.247L6.90625 9.04818V10.0938Z"
+                                                                    fill="#675F5F" />
                                                             </svg>
                                                         </a>
-                                                        <a href="{{ route('kelola-admin.destroy', 1) }}"
-                                                            class="cursor-pointer">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                                fill="currentColor" class="w-4 h-4">
-                                                                <path fill-rule="evenodd"
-                                                                    d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z"
-                                                                    clip-rule="evenodd" />
-                                                            </svg>
-                                                        </a>
-
+                                                        <form action="{{ route('data-admin.destroy', $d->id) }}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                    fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                                    stroke="currentColor" class="w-6 h-6">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                                </svg></button>
+                                                        </form>
                                                     </td>
                                                 </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                     <div class="mt-5">
-                                        {{-- {{ $data->links() }} --}}
+                                        {{ $data->links() }}
                                     </div>
                                 </div>
                             </div>

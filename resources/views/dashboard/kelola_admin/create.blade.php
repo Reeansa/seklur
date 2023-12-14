@@ -3,10 +3,9 @@
 @section('content')
     <div class="grid grid-cols-12 w-full h-screen">
         @include('components.sidebar')
-
         <div class="col-span-9 bg-slate-orange-200 p-5 space-y-20 bg-slate-200">
             @include('components.header')
-            <form class="space-y-5 bg-white rounded-xl" action="{{ route('kelola-admin.store') }}" method="POST">
+            <form class="space-y-5 bg-white rounded-xl" action="{{ route('data-admin.store') }}" method="POST">
                 @csrf
                 <div class="bg-[#4DA8CA] py-2 px-4 rounded-xl items-center flex gap-2 rounded-xl">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
@@ -38,12 +37,9 @@
                     <div>
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Password</p>
-                            <input name="password" type="password" class="w-1/2 border border-black py-2 px-4" placeholder="password">
+                            <input name="password" type="password" class="w-3/4 border border-black py-2 px-4" placeholder="password">
                         </div>
-                        @error('tempat_lahir')
-                            <p class="text-red-500">{{ $message }}</p>
-                        @enderror
-                        @error('tanggal_lahir')
+                        @error('password')
                             <p class="text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
@@ -51,8 +47,10 @@
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Kedudukan</p>
                             <select name="kedudukan" class="w-3/4 border border-black py-2 px-4">
-                                <option value="administrator">administrator</option>
-                                <option value="kaur pemerintah">kaur pemerintah</option>
+                                <option value="" class="hidden">-Pilih-</option>
+                                @foreach ($data as $d)
+                                <option value="{{ $d->id }}">{{ $d->kedudukan }}</option>
+                                @endforeach
                             </select>
                         </div>
                         @error('kedudukan')

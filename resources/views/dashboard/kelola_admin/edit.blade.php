@@ -1,13 +1,13 @@
 @extends('components.layout')
-@section('title', 'Tambah Data Penduduk')
+@section('title', 'Ubah Data Admin')
 @section('content')
     <div class="grid grid-cols-12 w-full h-screen">
         @include('components.sidebar')
-
         <div class="col-span-9 bg-slate-orange-200 p-5 space-y-20 bg-slate-200">
             @include('components.header')
-            <form class="space-y-5 bg-white rounded-xl" action="{{ route('kelola-admin.update') }}" method="POST">
+            <form class="space-y-5 bg-white rounded-xl" action="{{ route('data-admin.update', $data_admin->id) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="bg-[#4DA8CA] py-2 px-4 rounded-xl items-center flex gap-2 rounded-xl">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
                         <path fill-rule="evenodd"
@@ -20,7 +20,7 @@
                     <div>
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Nama User</p>
-                            <input name="nama" type="nama" class="w-3/4 border border-black py-2 px-4" placeholder="nama user">
+                            <input name="nama" type="nama" class="w-3/4 border border-black py-2 px-4" placeholder="nama user" value="{{ $data_admin->name }}">
                         </div>
                         @error('nama')
                             <p class="text-red-500">{{ $message }}</p>
@@ -29,7 +29,7 @@
                     <div>
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Username</p>
-                            <input name="username" type="text" class="w-3/4 border border-black py-2 px-4" placeholder="username">
+                            <input name="username" type="text" class="w-3/4 border border-black py-2 px-4" placeholder="username" value="{{ $data_admin->username }}">
                         </div>
                         @error('username')
                             <p class="text-red-500">{{ $message }}</p>
@@ -38,12 +38,9 @@
                     <div>
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Password</p>
-                            <input name="password" type="password" class="w-1/2 border border-black py-2 px-4" placeholder="password">
+                            <input name="password" type="password" class="w-3/4 border border-black py-2 px-4" placeholder="password">
                         </div>
-                        @error('tempat_lahir')
-                            <p class="text-red-500">{{ $message }}</p>
-                        @enderror
-                        @error('tanggal_lahir')
+                        @error('password')
                             <p class="text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
@@ -51,8 +48,10 @@
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Kedudukan</p>
                             <select name="kedudukan" class="w-3/4 border border-black py-2 px-4">
-                                <option value="administrator">administrator</option>
-                                <option value="kaur pemerintah">kaur pemerintah</option>
+                                <option value="{{ $data_admin->roles->id }}" class="hidden">{{ $data_admin->roles->kedudukan }}</option>
+                                @foreach ($data_role as $kedudukan)
+                                    <option value="{{ $kedudukan->id }}">{{ $kedudukan->kedudukan }}</option>
+                                @endforeach
                             </select>
                         </div>
                         @error('kedudukan')
@@ -61,7 +60,7 @@
                     </div>
                     <div class="flex items-center gap-5">
                         <button type="submit" class="bg-[#4DA8CA] p-2 rounded-lg">Simpan</button>
-                        <button class="bg-black/20 p-2 rounded-lg">Batal</button>
+                        <a href="{{ route('data-admin.index') }}" class="bg-black/20 p-2 rounded-lg">Batal</a>
                     </div>
                 </div>
             </form>
