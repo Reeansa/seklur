@@ -52,7 +52,7 @@ class PendudukController extends Controller
     public function update(Request $request, Penduduk $data_penduduk): RedirectResponse
     {
         $request->validate([
-            'nik' => 'required|unique:penduduks,nik,' . $data_penduduk->id,
+            'nik' => 'required|unique:penduduks,nik,' . $data_penduduk->nik . ',nik',
             'nama' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',

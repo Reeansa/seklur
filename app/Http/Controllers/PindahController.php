@@ -53,7 +53,7 @@ class PindahController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pindah $pindah)
+    public function show(Pindah $data_pindah)
     {
         //
     }
@@ -61,24 +61,43 @@ class PindahController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pindah $pindah)
+    public function edit(Pindah $data_pindah)
     {
-        return view( 'dashboard.pindah.edit' );
+        $data = [ 
+            'data_pindah' => $data_pindah,
+            'penduduk'    => Penduduk::pluck( 'nama', 'id' ),
+        ];
+        return view( 'dashboard.pindah.edit', $data );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePindahRequest $request, Pindah $pindah)
+    public function update(Request $request, Pindah $data_pindah)
     {
-        //
+        $request->validate( [
+            'nama' => ['required'],
+            'tanggal_pindah' => ['required'],
+            'alasan' => ['required'],
+        ] );
+
+        $data = [
+            'penduduk_id' => $request->nama,
+            'tanggal_pindah' => $request->tanggal_pindah,
+            'alasan' => $request->alasan,
+        ];
+
+        $data_pindah->update( $data );
+
+        return redirect()->route( 'data-pindah.index' )->with( 'success', 'Data berhasil diubah' );
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pindah $pindah)
+    public function destroy(Pindah $data_pindah)
     {
-        //
+        $data_pindah->delete();
+        return redirect()->route( 'data-pindah.index' )->with( 'success', 'Data berhasil dihapus' );
     }
 }

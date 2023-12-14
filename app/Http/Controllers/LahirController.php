@@ -25,7 +25,7 @@ class LahirController extends Controller
      */
     public function create()
     {
-        $data = KartuKeluarga::pluck( 'kepala_keluarga', 'id' );
+        $data = KartuKeluarga::with('penduduk')->get();
         return view( 'dashboard.lahir.create', compact('data') );
     }
 
@@ -67,7 +67,7 @@ class LahirController extends Controller
     {
         $data = [
             'data_lahir' => $data_lahir,
-            'kartu_keluarga' => KartuKeluarga::pluck( 'kepala_keluarga', 'id' ),
+            'kartu_keluarga' => KartuKeluarga::with('penduduk')->get(),
         ];
         return view( 'dashboard.lahir.edit', $data );
     }

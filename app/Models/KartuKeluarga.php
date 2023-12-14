@@ -24,11 +24,16 @@ class KartuKeluarga extends Model
         return $this->hasMany( Lahir::class);
     }
 
+    public function anggotaKeluarga(): HasMany
+    {
+        return $this->hasMany( AnggotaKeluarga::class );
+    }
+
     public function scopeFilter( Builder $query, array $filters ): void
     {
         $query->when( $filters[ 'search' ] ?? false, function ($query, $search) {
             $query->where( 'no_kk', 'like', '%' . $search . '%' )
-                ->orWhere( 'kepala_keluarga', 'like', '%' . $search . '%' );
+                ->orWhere( 'nik', 'like', '%' . $search . '%' );
         } );
     }
 }

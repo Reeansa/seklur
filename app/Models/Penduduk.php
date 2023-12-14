@@ -6,6 +6,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Penduduk extends Model
 {
@@ -23,6 +24,10 @@ class Penduduk extends Model
     // {
     //     return $this->belongsTo( Meninggal::class );
     // }
+
+    public function anggotaKeluarga(): HasMany {
+        return $this->hasMany( AnggotaKeluarga::class );
+    }
 
     public function scopeFilter( Builder $query, array $filters ): void
     {

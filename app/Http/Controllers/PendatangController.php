@@ -16,7 +16,7 @@ class PendatangController extends Controller
      */
     public function index()
     {
-        $data = Pendatang::paginate( 10 );
+        $data = Pendatang::latest()->filter( request( [ 'search' ] ) )->paginate( 10 );
         return view( 'dashboard.pendatang.index', compact( 'data' ) );
     }
 
