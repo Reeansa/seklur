@@ -65,10 +65,10 @@
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Keluarga</p>
                             <select name="kartu_keluarga_id" id="kartu_keluarga_id" class="w-3/4 border border-black py-2 px-4">
-                                <option class="hidden" value="{{ $data_lahir->kartu_keluarga_id }}">{{ $data_lahir->kartuKeluarga->kepala_keluarga }}</option>
+                                <option class="hidden" value="{{ $data_lahir->kartu_keluarga_id }}">{{ $data_lahir->kartuKeluarga->penduduk->nama }}</option>
                                 <option value="" disabled>-- pilih KK --</option>
-                                @foreach ($kartu_keluarga as $id => $kepala_keluarga )
-                                    <option class="@if ($id == $data_lahir->kartu_keluarga_id) hidden @endif" value="{{ $id }}">{{ $kepala_keluarga }}</option>
+                                @foreach ($kartu_keluarga as $k)
+                                    <option value="{{ $k->id }}">{{ $k->penduduk->nama }}</option>
                                 @endforeach
                             </select>
                         </div>

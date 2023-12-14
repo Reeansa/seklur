@@ -59,8 +59,8 @@
                             <p>Keluarga</p>
                             <select name="kartu_keluarga_id" id="kartu_keluarga_id" class="w-3/4 border border-black py-2 px-4">
                                 <option value="" class="hidden">-pilih KK-</option>
-                                @foreach ($data as $id => $kepala_keluarga)
-                                    <option value="{{ $id }}">{{ $kepala_keluarga }}</option>
+                                @foreach ($data as $d)
+                                    <option value="{{ $d->id }}">{{ $d->penduduk->nama }}</option>
                                 @endforeach
                             </select>
                         </div>

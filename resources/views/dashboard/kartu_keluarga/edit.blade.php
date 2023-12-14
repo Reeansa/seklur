@@ -5,7 +5,8 @@
         @include('components.sidebar')
         <div class="col-span-9 bg-slate-orange-200 p-5 space-y-20 bg-slate-200">
             @include('components.header')
-            <form class="space-y-5 bg-white rounded-xl" action="{{ route('data-kartu-keluarga.update', $data_kartu_keluarga->id) }}" method="POST">
+            <form class="space-y-5 bg-white rounded-xl"
+                action="{{ route('data-kartu-keluarga.update', $data_kartu_keluarga->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="bg-[#4DA8CA] py-2 px-4 rounded-xl items-center flex gap-2 rounded-xl">
@@ -30,8 +31,12 @@
                     <div>
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Kepala Keluarga</p>
-                            <input name="nama" type="text" class="w-3/4 border border-black py-2 px-4"
-                                value="{{ $data_kartu_keluarga->kepala_keluarga }}">
+                            <select name="kepala_keluarga" id="kepala_keluarga" class="w-3/4 border border-black py-2 px-4">
+                                <option value="{{ $data_kartu_keluarga->penduduk->nik }}" class="hidden">{{ $data_kartu_keluarga->penduduk->nama }}</option>
+                                @foreach ($penduduk as $nik => $nama)
+                                    <option value="{{ $nik }}">{{ $nama }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         @error('nama')
                             <p class="text-red-500">{{ $message }}</p>
