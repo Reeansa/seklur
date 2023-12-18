@@ -16,24 +16,14 @@ class Penduduk extends Model
 
     public function kartuKeluarga(): BelongsTo
     {
-        return $this->belongsTo( KartuKeluarga::class, 'nik', 'nik' );
+        return $this->belongsTo(KartuKeluarga::class, 'nik', 'nik');
     }
 
-
-    // public function meninggal(): BelongsTo
-    // {
-    //     return $this->belongsTo( Meninggal::class );
-    // }
-
-    public function anggotaKeluarga(): HasMany {
-        return $this->hasMany( AnggotaKeluarga::class );
-    }
-
-    public function scopeFilter( Builder $query, array $filters ): void
+    public function scopeFilter(Builder $query, array $filters): void
     {
-        $query->when( $filters[ 'search' ] ?? false, function ($query, $search) {
-            $query->where( 'nama', 'like', '%' . $search . '%' )
-                ->orWhere( 'nik', 'like', '%' . $search . '%' );
-        } );
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            $query->where('nama', 'like', '%' . $search . '%')
+                ->orWhere('nik', 'like', '%' . $search . '%');
+        });
     }
 }

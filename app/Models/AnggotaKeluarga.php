@@ -10,13 +10,15 @@ class AnggotaKeluarga extends Model
 {
     use HasFactory;
 
-    protected $guarded = [ 'id' ];
+    protected $guarded = ['id'];
 
-    public function kartuKeluarga(): BelongsTo {
-        return $this->belongsTo( KartuKeluarga::class );
+    public function kartuKeluarga(): BelongsTo
+    {
+        return $this->belongsTo(KartuKeluarga::class);
     }
 
-    public function penduduk(): BelongsTo {
-        return $this->belongsTo( Penduduk::class );
+    public function penduduk(): BelongsTo
+    {
+        return $this->belongsTo(Penduduk::class, 'penduduk_id');
     }
 }
