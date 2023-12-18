@@ -9,12 +9,12 @@ use Illuminate\View\View;
 
 class PendudukController extends Controller
 {
-    public function index(): View
+    public function index()
     {
         $data = Penduduk::latest()->filter(request(['search']))->paginate(10);
-        dd(Penduduk::with(['kartuKeluarga.anggotaKeluarga'])->whereHas('kartuKeluarga')->get()->take(10));
+        return response()->json(Penduduk::with(['kartuKeluarga.anggotaKeluarga.penduduk'])->whereHas('kartuKeluarga')->get()->take(10));
 
-        return view('dashboard.penduduk.index', compact('data'));
+        // return view('dashboard.penduduk.index', compact('data'));
     }
 
     public function create(): View
