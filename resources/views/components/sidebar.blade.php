@@ -117,7 +117,7 @@
                     </a>
                 </div>
             </div>
-            @if (auth()->user()->roles->kedudukan == 'administrator')
+            @if (auth()->user()->roles->kedudukan == 'Administrator')
                 <a href="{{ route('kelola-laporan') }}"
                 class="flex items-center w-full gap-5 cursor-pointer {{ request()->is('kelola-laporan') ? 'active px-3' : 'px-5' }}">
                 <svg width="30" height="30" viewBox="0 0 15 15" fill="none"
