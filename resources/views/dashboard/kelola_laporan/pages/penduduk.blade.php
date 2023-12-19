@@ -18,6 +18,9 @@
         <th scope="col" class="border-r px-4 py-2 dark:border-neutral-500">
             No KK
         </th>
+        <th scope="col" class="border-r px-4 py-2 dark:border-neutral-500">
+            dibuat pada
+        </th>
     </tr>
 </thead>
 <tbody class="bg-[#ECECEC]">
@@ -48,6 +51,9 @@
                 @else
                     Tidak ada kartu keluarga
                 @endif
+            </td>
+            <td class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
+                {{ $item->created_at->format('d-m-Y') }}
             </td>
         </tr>
         @endforeach

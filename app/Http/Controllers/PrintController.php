@@ -16,7 +16,6 @@ class PrintController extends Controller
     {
         if ($type === 'data-penduduk') {
             $data = Penduduk::all();
-
             return view('dashboard.penduduk.print', compact('data'));
         } else if($type === 'data-kartu-keluarga') {
             $data = KartuKeluarga::all();
