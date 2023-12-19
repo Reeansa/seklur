@@ -53,7 +53,6 @@ Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('/', [AuthController::class, 'authenticate'])->name('login.authenticate');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('print/{type}', [PrintController::class, 'index'])->name('print')->middleware('auth');
 
 Route::resource('data-penduduk', PendudukController::class)->middleware('auth');
 Route::resource('data-kartu-keluarga', KartuKeluargaController::class)->middleware('auth');
@@ -74,3 +73,7 @@ Route::post('/kelola-laporan/create', [KelolaLaporanController::class, 'store'])
 Route::get('/kelola-laporan/edit/{kartuKeluarga}', [KelolaLaporanController::class, 'edit'])->name('kelola-laporan.edit');
 Route::post('/kelola-laporan/edit/{kartuKeluarga}', [KelolaLaporanController::class, 'update'])->name('kelola-laporan.update');
 Route::get('/kelola-laporan/delete/{kartuKeluarga}', [KelolaLaporanController::class, 'destroy'])->name('kelola-laporan.destroy');
+Route::get( '/kelola-laporan/{jenis}', [ KelolaLaporanController::class, 'show' ] );
+
+// Print
+Route::get('print/{type}', [PrintController::class, 'index'])->name('print')->middleware('auth');
