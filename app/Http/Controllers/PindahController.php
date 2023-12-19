@@ -15,7 +15,7 @@ class PindahController extends Controller
      */
     public function index()
     {
-        $data = Pindah::paginate( 10 );
+        $data = Pindah::latest()->filter( request( [ 'search' ] ) )->paginate( 10 );
         return view( 'dashboard.pindah.index', compact( 'data' ) );
     }
 

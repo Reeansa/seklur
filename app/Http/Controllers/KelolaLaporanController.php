@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KartuKeluarga;
 use App\Models\KelolaLaporan;
 use App\Http\Requests\StoreKelolaLaporanRequest;
 use App\Http\Requests\UpdateKelolaLaporanRequest;
+use App\Models\Lahir;
+use App\Models\Meninggal;
+use App\Models\Pendatang;
+use App\Models\Penduduk;
+use App\Models\Pindah;
 
 class KelolaLaporanController extends Controller
 {
@@ -13,7 +19,7 @@ class KelolaLaporanController extends Controller
      */
     public function index()
     {
-        return view( 'dashboard.kelola_laporan.index' );
+        return view( 'dashboard.kelola_laporan.index');
     }
 
     /**
@@ -35,9 +41,27 @@ class KelolaLaporanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(KelolaLaporan $kelolaLaporan)
+    public function show($jenis)
     {
-        //
+        if ($jenis === 'data-penduduk') {
+            $data = Penduduk::latest()->filter( request( [ 'search' ] ) )->get();
+            return response()->view( 'dashboard.kelola_laporan.pages.penduduk', [ 'data' => $data ] )->getContent();
+        } elseif ($jenis === 'data-kartu-keluarga') {
+            $data = KartuKeluarga::latest()->filter( request( [ 'search' ] ) )->get();
+            return response()->view( 'dashboard.kelola_laporan.pages.kartuKeluarga', [ 'data' => $data ] )->getContent();
+        } elseif ($jenis === 'data-lahir') {
+            $data = Lahir::latest()->filter( request( [ 'search' ] ) )->get();
+            return response()->view( 'dashboard.kelola_laporan.pages.lahir', [ 'data' => $data ] )->getContent();
+        } elseif ($jenis === 'data-meninggal') {
+            $data = Meninggal::latest()->filter( request( [ 'search' ] ) )->get();
+            return response()->view( 'dashboard.kelola_laporan.pages.meninggal', [ 'data' => $data ] )->getContent();
+        } elseif ($jenis === 'data-pendatang') {
+            $data = Pendatang::latest()->filter( request( [ 'search' ] ) )->get();
+            return response()->view( 'dashboard.kelola_laporan.pages.pendatang', [ 'data' => $data ] )->getContent();
+        } elseif ($jenis === 'data-pindah') {
+            $data = Pindah::latest()->filter( request( [ 'search' ] ) )->get();
+            return response()->view( 'dashboard.kelola_laporan.pages.pindah', [ 'data' => $data ] )->getContent();
+        }
     }
 
     /**

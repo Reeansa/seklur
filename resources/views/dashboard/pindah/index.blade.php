@@ -47,12 +47,13 @@
                         <p>Tambah Data</p>
                     </a>
 
-                    <div class="flex justify-end">
+                    <form action="{{ route('data-pindah.index') }}" class="flex justify-end">
                         <div class="flex gap-2">
                             <p>Search:</p>
-                            <input type="text" class="border border-black rounded-sm">
+                            <input type="text" name="search" class="border border-black rounded-sm"
+                                value="{{ request('search') }}">
                         </div>
-                    </div>
+                    </form>
                     <div class="flex flex-col">
                         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">

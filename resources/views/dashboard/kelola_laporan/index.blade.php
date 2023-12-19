@@ -28,25 +28,32 @@
                     <h1 class="text-xl">Kelola Laporan</h1>
                 </div>
                 <div class="p-5">
-                    <a href="{{ route('data-pindah.create') }}"
+                    <button id="print"
                         class="flex gap-1 items-center p-1 bg-[#4DA8CA] w-min rounded-lg whitespace-nowrap">
-                        <svg class="w-6 h-6" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
                             <path
-                                d="M9.64941 2.25V1.3125C9.64941 1.26277 9.62966 1.21508 9.5945 1.17992C9.55933 1.14475 9.51164 1.125 9.46191 1.125H3.08691C3.03719 1.125 2.98949 1.14475 2.95433 1.17992C2.91917 1.21508 2.89941 1.26277 2.89941 1.3125V2.25"
+                                d="M15.4184 1.63342C15.3517 1.56033 15.2709 1.5015 15.1809 1.46048C15.0909 1.41946 14.9935 1.3971 14.8945 1.39474C14.7956 1.39238 14.6973 1.41008 14.6054 1.44676C14.5135 1.48344 14.43 1.53835 14.3599 1.60818L13.752 2.21414L14.7872 3.24676L15.3849 2.65209C15.5209 2.51946 15.6003 2.33937 15.6066 2.1495C15.6128 1.95963 15.5454 1.7747 15.4184 1.63342Z"
                                 fill="#675F5F" />
                             <path
-                                d="M9.83691 2.625H2.71191C2.36382 2.625 2.02998 2.76328 1.78384 3.00942C1.53769 3.25556 1.39941 3.5894 1.39941 3.9375V8.8125C1.39941 8.86223 1.41917 8.90992 1.45433 8.94508C1.48949 8.98025 1.53719 9 1.58691 9H2.89941V10.6875C2.89941 10.7372 2.91917 10.7849 2.95433 10.8201C2.98949 10.8552 3.03719 10.875 3.08691 10.875H9.46191C9.51164 10.875 9.55933 10.8552 9.5945 10.8201C9.62966 10.7849 9.64941 10.7372 9.64941 10.6875V9H10.9619C11.0116 9 11.0593 8.98025 11.0945 8.94508C11.1297 8.90992 11.1494 8.86223 11.1494 8.8125V3.9375C11.1494 3.5894 11.0111 3.25556 10.765 3.00942C10.5189 2.76328 10.185 2.625 9.83691 2.625ZM8.71191 9.84375C8.71191 9.86861 8.70204 9.89246 8.68446 9.91004C8.66687 9.92762 8.64303 9.9375 8.61816 9.9375H3.93066C3.9058 9.9375 3.88195 9.92762 3.86437 9.91004C3.84679 9.89246 3.83691 9.86861 3.83691 9.84375V6.28125C3.83691 6.25639 3.84679 6.23254 3.86437 6.21496C3.88195 6.19738 3.9058 6.1875 3.93066 6.1875H8.61816C8.64303 6.1875 8.66687 6.19738 8.68446 6.21496C8.70204 6.23254 8.71191 6.25639 8.71191 6.28125V9.84375ZM9.50879 4.87313C9.39406 4.88235 9.27927 4.85615 9.1799 4.79808C9.08052 4.74 9.00136 4.65284 8.95309 4.54835C8.90481 4.44387 8.88975 4.32709 8.90994 4.21378C8.93013 4.10047 8.98459 3.99607 9.06598 3.91469C9.14736 3.8333 9.25175 3.77884 9.36507 3.75865C9.47838 3.73847 9.59516 3.75353 9.69964 3.8018C9.80413 3.85007 9.89129 3.92924 9.94937 4.02861C10.0074 4.12798 10.0336 4.24277 10.0244 4.3575C10.0137 4.49068 9.95595 4.6157 9.86147 4.71018C9.76699 4.80466 9.64197 4.86242 9.50879 4.87313Z"
+                                d="M8.39242 11.1562H7.95182H6.90625H5.84375V10.0938V9.04818V8.60758L6.15586 8.29613L10.7425 3.71875H1.59375V15.4062H13.2812V6.25746L8.70387 10.8441L8.39242 11.1562Z"
+                                fill="#675F5F" />
+                            <path d="M13.2813 4.75322L14.3701 3.66217L13.3378 2.62988L12.2471 3.71861H13.2813V4.75322Z"
+                                fill="#675F5F" />
+                            <path d="M6.90625 10.0938H7.95182L13.2812 4.75336V3.71875H12.247L6.90625 9.04818V10.0938Z"
                                 fill="#675F5F" />
                         </svg>
-                        <p>Print</p>
-                    </a>
 
-                    <div class="flex justify-end">
-                        <div class="flex gap-2 mx-2">
+                        <p>Print</p>
+                    </button>
+
+                    <form action="/kelola-laporan/" class="flex justify-end">
+                        <div class="flex gap-2">
                             <p>Search:</p>
-                            <input type="text" class="border border-black rounded-sm">
+                            <input type="text" name="search" class="border border-black rounded-sm"
+                                value="{{ request('search') }}">
                         </div>
-                    </div>
+                    </form>
                     <div class="flex flex-col">
                         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
@@ -74,72 +81,32 @@
                                                 </select>
                                             </div>
                                             <div class="flex w-full items-center justify-evenly">
-                                                <label for="tahun" class="">Bulan</label>
-                                                <label for="tahun" class="w-auto">:</label>
-                                                <select name="tahun" id="tahun"
+                                                <label for="bulan" class="">Bulan</label>
+                                                <label for="bulan" class="w-auto">:</label>
+                                                <select name="bulan" id="bulan"
                                                     class="w-8/12 p-2 mx-2 border border-black">
                                                     <option value="" class="hidden">pilih Bulan</option>
                                                 </select>
                                             </div>
                                             <div class="flex w-full items-center justify-between">
-                                                <label for="tahun" class="">Keterangan</label>
-                                                <label for="tahun" class="w-auto">:</label>
-                                                <select name="tahun" id="tahun"
+                                                <label for="keterangan" class="">Keterangan</label>
+                                                <label for="keterangan" class="w-auto">:</label>
+                                                <select name="keterangan" id="keterangan"
                                                     class="w-8/12 p-2 mx-2 border border-black">
                                                     <option value="" class="hidden">Pilih Keterangan</option>
-                                                    <option value="">Data Penduduk</option>
-                                                    <option value="">Data Kartu Keluarga</option>
-                                                    <option value="">Data Lahir</option>
-                                                    <option value="">Data Meninggal</option>
-                                                    <option value="">Data Pendatang</option>
-                                                    <option value="">Data Pindah</option>
+                                                    <option value="data-penduduk">Data Penduduk</option>
+                                                    <option value="data-kartu-keluarga">Data Kartu Keluarga</option>
+                                                    <option value="data-lahir">Data Lahir</option>
+                                                    <option value="data-meninggal">Data Meninggal</option>
+                                                    <option value="data-pendatang">Data Pendatang</option>
+                                                    <option value="data-pindah">Data Pindah</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <table
+                                    <table id="tabelLaporan"
                                         class="min-w-full border border-[#858383] text-center text-sm font-light dark:border-neutral-500 mt-10">
-                                        <thead class="border-b font-medium dark:border-neutral-500">
-                                            <tr>
-                                                <th scope="col" class="border-r px-4 py-2 dark:border-neutral-500">
-                                                    No
-                                                </th>
-                                                <th scope="col" class="border-r px-4 py-2 dark:border-neutral-500">
-                                                    NIK
-                                                </th>
-                                                <th scope="col" class="border-r px-4 py-2 dark:border-neutral-500">
-                                                    Nama
-                                                </th>
-                                                <th scope="col" class="border-r px-4 py-2 dark:border-neutral-500">
-                                                    Tanggal
-                                                </th>
-                                                <th scope="col" class="border-r px-4 py-2 dark:border-neutral-500">
-                                                    Keterangan
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="bg-[#ECECEC]">
-                                            <tr class="border-b dark:border-neutral-500">
-                                                <td
-                                                    class="whitespace-nowrap border-r px-4 py-2 font-medium dark:border-neutral-500">
-                                                    1
-                                                </td>
-                                                <td class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                                                    asdasdasd
-                                                </td>
-                                                <td class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                                                    asdasdasd
-                                                </td>
-                                                <td class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                                                    asdasdasd
-                                                </td>
-                                                <td class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                                                    asdasdasd
-                                                </td>
-                                            </tr>
-                                        </tbody>
                                     </table>
-                                    {{-- {{ $data->links() }} --}}
                                 </div>
                             </div>
                         </div>
@@ -148,4 +115,36 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#keterangan').on('change', function() {
+                    var jenis = $(this).val();
+                    $.ajax({
+                        type: 'GET',
+                        url: '/kelola-laporan/' + jenis,
+                        success: function(data) {
+                            // Ganti isi tabel dengan data yang diterima dari server
+                            $('#tabelLaporan').html(data);
+                        }
+                    });
+                });
+
+                $('#print').on('click', function() {
+                    // Ambil nilai jenis dari elemen dengan id 'keterangan'
+                    var jenis = $('#keterangan').val();
+
+                    // Buka jendela baru untuk mencetak
+                    let printWindow = window.open('/print/' + jenis, '_blank');
+
+                    // Setelah jendela baru dimuat, mulai mencetak
+                    printWindow.onload = function() {
+                        printWindow.print();
+                    };
+                });
+            });
+        </script>
+    @endpush
 @endsection

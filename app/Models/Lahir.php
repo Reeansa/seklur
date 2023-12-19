@@ -17,6 +17,11 @@ class Lahir extends Model
         return $this->belongsTo( KartuKeluarga::class);
     }
 
+    public function penduduk(): BelongsTo
+    {
+        return $this->belongsTo( Penduduk::class );
+    }
+
     public function scopeFilter( Builder $query, array $filters ): void
     {
         $query->when( $filters[ 'search' ] ?? false, function ($query, $search) {

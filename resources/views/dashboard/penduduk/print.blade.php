@@ -28,44 +28,43 @@
             </tr>
         </thead>
         <tbody class="bg-[#ECECEC]">
-            @foreach ($data as $d)
+            @foreach ($data as $d => $item)
                 <tr class="border-b dark:border-neutral-500">
                     <td class="whitespace-nowrap border-r px-4 py-2 font-medium dark:border-neutral-500">
                         {{ $loop->iteration }}
                     </td>
                     <td class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                        {{ $d->nik }}
+                        {{ $item->nik }}
                     </td>
                     <td class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                        {{ $d->nama }}
+                        {{ $item->nama }}
                     </td>
                     <td class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                        @if ($d->jk == 'l')
+                        @if ($item->jk == 'l')
                             Laki-Laki
                         @else
                             Perempuan
                         @endif
                     </td>
                     <td class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                        {{ $d->alamat }}
+                        {{ $item->alamat }}
                     </td>
                     <td class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                        @if ($d->kartuKeluarga)
-                            {{ $d->kartuKeluarga->no_kk }}
+                        @if ($item->anggotaKeluarga)
+                            {{ $item->anggotaKeluarga->kartuKeluarga->no_kk }}
                         @else
-                            Tidak Ada Kartu Keluarga
+                            Tidak ada kartu keluarga
                         @endif
-
                     </td>
                     <td class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500 flex gap-3 justify-center">
-                        <a href="{{ route('data-penduduk.show', $d->id) }}" class="cursor-pointer">
+                        <a href="{{ route('data-penduduk.show', $d) }}" class="cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
                                 <path fill-rule="evenodd"
                                     d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
                                     clip-rule="evenodd" />
                             </svg>
                         </a>
-                        <a href={{ route('data-penduduk.edit', $d->id) }} class="cursor-pointer">
+                        <a href={{ route('data-penduduk.edit', $d) }} class="cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
                                 <path
                                     d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
@@ -73,7 +72,7 @@
                                     d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
                             </svg>
                         </a>
-                        <form action="{{ route('data-penduduk.destroy', $d->id) }}" method="post" class="cursor-pointer">
+                        <form action="{{ route('data-penduduk.destroy', $d) }}" method="post" class="cursor-pointer">
                             @csrf
                             @method('DELETE')
                             <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
