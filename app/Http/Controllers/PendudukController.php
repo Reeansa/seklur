@@ -11,10 +11,8 @@ class PendudukController extends Controller
 {
     public function index()
     {
-        $data = Penduduk::latest()->filter(request(['search']))->paginate(10);
-        return response()->json(Penduduk::with(['kartuKeluarga.anggotaKeluarga.penduduk'])->whereHas('kartuKeluarga')->get()->take(10));
-
-        // return view('dashboard.penduduk.index', compact('data'));
+        $data = Penduduk::latest()->filter( request( [ 'search' ] ) )->paginate( 10 );
+        return view('dashboard.penduduk.index', compact('data'));
     }
 
     public function create(): View

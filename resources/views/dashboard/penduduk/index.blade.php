@@ -46,43 +46,6 @@
 
                         <p>Tambah Data</p>
                     </a>
-                    <button id="print"
-                        class="flex gap-1 items-center p-1 bg-[#4DA8CA] w-min rounded-lg whitespace-nowrap">
-                        <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M15.4184 1.63342C15.3517 1.56033 15.2709 1.5015 15.1809 1.46048C15.0909 1.41946 14.9935 1.3971 14.8945 1.39474C14.7956 1.39238 14.6973 1.41008 14.6054 1.44676C14.5135 1.48344 14.43 1.53835 14.3599 1.60818L13.752 2.21414L14.7872 3.24676L15.3849 2.65209C15.5209 2.51946 15.6003 2.33937 15.6066 2.1495C15.6128 1.95963 15.5454 1.7747 15.4184 1.63342Z"
-                                fill="#675F5F" />
-                            <path
-                                d="M8.39242 11.1562H7.95182H6.90625H5.84375V10.0938V9.04818V8.60758L6.15586 8.29613L10.7425 3.71875H1.59375V15.4062H13.2812V6.25746L8.70387 10.8441L8.39242 11.1562Z"
-                                fill="#675F5F" />
-                            <path d="M13.2813 4.75322L14.3701 3.66217L13.3378 2.62988L12.2471 3.71861H13.2813V4.75322Z"
-                                fill="#675F5F" />
-                            <path d="M6.90625 10.0938H7.95182L13.2812 4.75336V3.71875H12.247L6.90625 9.04818V10.0938Z"
-                                fill="#675F5F" />
-                        </svg>
-
-                        <p>Print</p>
-                    </button>
-                    <a href="{{ route('data-penduduk.create') }}"
-                        class="flex gap-1 items-center p-1 bg-[#4DA8CA] w-min rounded-lg whitespace-nowrap">
-                        <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M15.4184 1.63342C15.3517 1.56033 15.2709 1.5015 15.1809 1.46048C15.0909 1.41946 14.9935 1.3971 14.8945 1.39474C14.7956 1.39238 14.6973 1.41008 14.6054 1.44676C14.5135 1.48344 14.43 1.53835 14.3599 1.60818L13.752 2.21414L14.7872 3.24676L15.3849 2.65209C15.5209 2.51946 15.6003 2.33937 15.6066 2.1495C15.6128 1.95963 15.5454 1.7747 15.4184 1.63342Z"
-                                fill="#675F5F" />
-                            <path
-                                d="M8.39242 11.1562H7.95182H6.90625H5.84375V10.0938V9.04818V8.60758L6.15586 8.29613L10.7425 3.71875H1.59375V15.4062H13.2812V6.25746L8.70387 10.8441L8.39242 11.1562Z"
-                                fill="#675F5F" />
-                            <path d="M13.2813 4.75322L14.3701 3.66217L13.3378 2.62988L12.2471 3.71861H13.2813V4.75322Z"
-                                fill="#675F5F" />
-                            <path d="M6.90625 10.0938H7.95182L13.2812 4.75336V3.71875H12.247L6.90625 9.04818V10.0938Z"
-                                fill="#675F5F" />
-                        </svg>
-
-                        <p>Tambah Data</p>
-                    </a>
-
                     <form action="{{ route('data-penduduk.index') }}" class="flex justify-end">
                         <div class="flex gap-2">
                             <p>Search:</p>
@@ -121,7 +84,7 @@
                                             </tr>
                                         </thead>
                                         <tbody class="bg-[#ECECEC]">
-                                            @foreach ($data as $d)
+                                            @foreach ($data as $d => $item)
                                                 <tr class="border-b dark:border-neutral-500">
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 font-medium dark:border-neutral-500">
@@ -129,15 +92,15 @@
                                                     </td>
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                                                        {{ $d->nik }}
+                                                        {{ $item->nik }}
                                                     </td>
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                                                        {{ $d->nama }}
+                                                        {{ $item->nama }}
                                                     </td>
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                                                        @if ($d->jk == 'l')
+                                                        @if ($item->jk == 'l')
                                                             Laki-Laki
                                                         @else
                                                             Perempuan
@@ -145,20 +108,19 @@
                                                     </td>
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                                                        {{ $d->alamat }}
+                                                        {{ $item->alamat }}
                                                     </td>
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500">
-                                                        @if ($d->kartuKeluarga)
-                                                            {{ $d->kartuKeluarga->no_kk }}
-                                                        @else
-                                                            Tidak Ada Kartu Keluarga
-                                                        @endif
-
+                                                       @if ($item->anggotaKeluarga)
+                                                           {{ $item->anggotaKeluarga->kartuKeluarga->no_kk }}
+                                                           @else
+                                                           Tidak ada kartu keluarga
+                                                       @endif
                                                     </td>
                                                     <td
                                                         class="whitespace-nowrap border-r px-4 py-2 dark:border-neutral-500 flex gap-3 justify-center">
-                                                        <a href="{{ route('data-penduduk.show', $d->id) }}"
+                                                        <a href="{{ route('data-penduduk.show', $d) }}"
                                                             class="cursor-pointer">
                                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                                 fill="currentColor" class="w-4 h-4">
@@ -167,7 +129,7 @@
                                                                     clip-rule="evenodd" />
                                                             </svg>
                                                         </a>
-                                                        <a href={{ route('data-penduduk.edit', $d->id) }}
+                                                        <a href={{ route('data-penduduk.edit', $d) }}
                                                             class="cursor-pointer">
                                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                                 fill="currentColor" class="w-4 h-4">
@@ -177,7 +139,7 @@
                                                                     d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
                                                             </svg>
                                                         </a>
-                                                        <form action="{{ route('data-penduduk.destroy', $d->id) }}"
+                                                        <form action="{{ route('data-penduduk.destroy', $d) }}"
                                                             method="post" class="cursor-pointer">
                                                             @csrf
                                                             @method('DELETE')
@@ -207,15 +169,3 @@
     </div>
 @endsection
 
-@push('scripts')
-    <script>
-        $('#print').on('click', function() {
-            let printWindow = window.open('/print/penduduk', '_blank');
-
-            // Menunggu jendela baru terbuka sebelum mencetak
-            printWindow.onload = function() {
-                printWindow.print();
-            };
-        });
-    </script>
-@endpush

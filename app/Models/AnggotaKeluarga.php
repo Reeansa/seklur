@@ -19,6 +19,6 @@ class AnggotaKeluarga extends Model
 
     public function penduduk(): BelongsTo
     {
-        return $this->belongsTo(Penduduk::class, 'penduduk_id');
+        return $this->belongsTo(Penduduk::class);
     }
 }

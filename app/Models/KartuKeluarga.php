@@ -33,7 +33,10 @@ class KartuKeluarga extends Model
     {
         $query->when( $filters[ 'search' ] ?? false, function ($query, $search) {
             $query->where( 'no_kk', 'like', '%' . $search . '%' )
-                ->orWhere( 'nik', 'like', '%' . $search . '%' );
+                ->orWhere( 'nik', 'like', '%' . $search . '%' )
+                ->orWhereHas( 'penduduk', function ($query) use ($search) {
+                    $query->where( 'nama', 'like', '%' . $search . '%' );
+                } );
         } );
     }
 }
