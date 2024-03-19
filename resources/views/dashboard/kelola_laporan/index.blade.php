@@ -71,62 +71,18 @@
                                             <input type="text" name="kecamatan" id="kecamatan" value="Bantarsoka"
                                                 class="w-11/12 p-2 mx-2 border border-black" disabled>
                                         </div>
-                                        <div class="flex items-center">
+                                        <div class="grid grid-cols-2 items-center gap-10">
                                             <div class="flex w-full items-center">
-                                                <label for="tahun" class="w-28">Tahun</label>
+                                                <label for="tahun" class="w-28">Rentang Tanggal Awal</label>
                                                 <label for="tahun" class="w-auto">:</label>
-                                                <select name="tahun" id="tahun"
-                                                    class="w-8/12 p-2 mx-2 border border-black"
-                                                    onchange="tampilkanLaporan()">
-                                                    <option value="" class="hidden">pilih Tahun</option>
-                                                    @for ($tahun = date('Y'); $tahun >= 1950; $tahun--)
-                                                        <option value="{{ $tahun }}">{{ $tahun }}</option>
-                                                    @endfor
-                                                </select>
+                                                <input onchange="tampilkanLaporan()" type="date" id="first-date"
+                                                    class="flex-grow p-2 mx-2 border border-black">
                                             </div>
-                                            <div class="flex w-full items-center justify-evenly">
-                                                <label for="bulan" class="">Bulan</label>
-                                                <label for="bulan" class="w-auto">:</label>
-                                                <select name="bulan" id="bulan"
-                                                    class="w-8/12 p-2 mx-2 border border-black"
-                                                    onchange="tampilkanLaporan()">
-                                                    <option value="" class="hidden">Pilih Bulan</option>
-                                                    @php
-                                                        $namaBulan = [
-                                                            1 => 'Januari',
-                                                            2 => 'Februari',
-                                                            3 => 'Maret',
-                                                            4 => 'April',
-                                                            5 => 'Mei',
-                                                            6 => 'Juni',
-                                                            7 => 'Juli',
-                                                            8 => 'Agustus',
-                                                            9 => 'September',
-                                                            10 => 'Oktober',
-                                                            11 => 'November',
-                                                            12 => 'Desember',
-                                                        ];
-                                                    @endphp
-
-                                                    @foreach ($namaBulan as $key => $nama)
-                                                        <option value="{{ $key }}">{{ $nama }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="flex w-full items-center justify-between">
-                                                <label for="keterangan" class="">Keterangan</label>
-                                                <label for="keterangan" class="w-auto">:</label>
-                                                <select name="keterangan" id="keterangan"
-                                                    class="w-8/12 p-2 mx-2 border border-black"
-                                                    onchange="tampilkanLaporan()">
-                                                    <option value="" class="hidden">Pilih Keterangan</option>
-                                                    <option value="data-penduduk">Data Penduduk</option>
-                                                    <option value="data-kartu-keluarga">Data Kartu Keluarga</option>
-                                                    <option value="data-lahir">Data Lahir</option>
-                                                    <option value="data-meninggal">Data Meninggal</option>
-                                                    <option value="data-pendatang">Data Pendatang</option>
-                                                    <option value="data-pindah">Data Pindah</option>
-                                                </select>
+                                            <div class="flex w-full items-center">
+                                                <label for="tahun" class="w-28">Rentang Tanggal Akhir</label>
+                                                <label for="tahun" class="w-auto">:</label>
+                                                <input onchange="tampilkanLaporan()" type="date" id="last-date"
+                                                    class="flex-grow p-2 mx-2 border border-black">
                                             </div>
                                         </div>
                                     </div>
@@ -173,13 +129,12 @@
             });
 
             function tampilkanLaporan() {
-                var tahun = $('#tahun').val();
-                var bulan = $('#bulan').val();
-                var keterangan = $('#keterangan').val();
+                var firstDate = $('#first-date').val();
+                var lastDate = $('#last-date').val();
 
                 $.ajax({
                     type: 'GET',
-                    url: '/kelola-laporan/' + tahun + '/' + bulan + '/' + keterangan,
+                    url: '/kelola-laporan/' + firstDate + '/' + lastDate,
                     success: function(data) {
                         $('#tabelLaporan').html(data);
                     },
@@ -188,6 +143,23 @@
                     }
                 });
             }
+
+            // function tampilkanLaporan() {
+            //     var tahun = $('#tahun').val();
+            //     var bulan = $('#bulan').val();
+            //     var keterangan = $('#keterangan').val();
+
+            //     $.ajax({
+            //         type: 'GET',
+            //         url: '/kelola-laporan/' + tahun + '/' + bulan + '/' + keterangan,
+            //         success: function(data) {
+            //             $('#tabelLaporan').html(data);
+            //         },
+            //         error: function(error) {
+            //             console.log(error);
+            //         }
+            //     });
+            // }
         </script>
     @endpush
 @endsection

@@ -19,7 +19,7 @@ class KelolaLaporanController extends Controller
      */
     public function index()
     {
-        return view( 'dashboard.kelola_laporan.index' );
+        return view('dashboard.kelola_laporan.index');
     }
 
     /**
@@ -33,7 +33,7 @@ class KelolaLaporanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store( StoreKelolaLaporanRequest $request )
+    public function store(StoreKelolaLaporanRequest $request)
     {
         //
     }
@@ -42,38 +42,16 @@ class KelolaLaporanController extends Controller
      * Display the specified resource.
      */
 
-    public function laporanTahunBulan( $tahun, $bulan, $keterangan )
+    public function laporanRentangTanggal($firstDate, $lastDaet)
     {
-        switch ($keterangan) {
-            case 'data-penduduk':
-                $data = Penduduk::whereYear( 'created_at', $tahun )->whereMonth( 'created_at', $bulan )->get();
-                return response()->view( 'dashboard.kelola_laporan.pages.penduduk', [ 'data' => $data ] )->getContent();
-            case 'data-kartu-keluarga':
-                $data = KartuKeluarga::whereYear( 'created_at', $tahun )->whereMonth( 'created_at', $bulan )->get();
-                return response()->view( 'dashboard.kelola_laporan.pages.kartuKeluarga', [ 'data' => $data ] )->getContent();
-            case 'data-lahir':
-                $data = Lahir::whereYear( 'created_at', $tahun )->whereMonth( 'created_at', $bulan )->get();
-                return response()->view( 'dashboard.kelola_laporan.pages.lahir', [ 'data' => $data ] )->getContent();
-            case 'data-meninggal':
-                $data = Meninggal::whereYear( 'created_at', $tahun )->whereMonth( 'created_at', $bulan )->get();
-                return response()->view( 'dashboard.kelola_laporan.pages.meninggal', [ 'data' => $data ] )->getContent();
-            case 'data-pendatang':
-                $data = Pendatang::whereYear( 'created_at', $tahun )->whereMonth( 'created_at', $bulan )->get();
-                return response()->view( 'dashboard.kelola_laporan.pages.pendatang', [ 'data' => $data ] )->getContent();
-            case 'data-pindah':
-                $data = Pindah::whereYear( 'created_at', $tahun )->whereMonth( 'created_at', $bulan )->get();
-                return response()->view( 'dashboard.kelola_laporan.pages.pindah', [ 'data' => $data ] )->getContent();
-            default:
-                $data = [];
-                break;
-        }
-        return response()->view( 'dashboard.kelola_laporan.pages.penduduk', [ 'data' => $data ] )->getContent();
+        $data = Penduduk::whereBetween('created_at', [$firstDate, $lastDaet])->get();
+        return response()->view('dashboard.kelola_laporan.pages.penduduk', ['data' => $data])->getContent();
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit( KelolaLaporan $kelolaLaporan )
+    public function edit(KelolaLaporan $kelolaLaporan)
     {
         //
     }
@@ -81,7 +59,7 @@ class KelolaLaporanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update( UpdateKelolaLaporanRequest $request, KelolaLaporan $kelolaLaporan )
+    public function update(UpdateKelolaLaporanRequest $request, KelolaLaporan $kelolaLaporan)
     {
         //
     }
@@ -89,7 +67,7 @@ class KelolaLaporanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( KelolaLaporan $kelolaLaporan )
+    public function destroy(KelolaLaporan $kelolaLaporan)
     {
         //
     }

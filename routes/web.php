@@ -17,6 +17,7 @@ use App\Models\Meninggal;
 use App\Models\Pendatang;
 use App\Models\Penduduk;
 use App\Models\Pindah;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,6 +51,16 @@ Route::get('/dashboard', function () {
 
 // login
 Route::get('/', [AuthController::class, 'index'])->name('login');
+Route::get('/create-admin', function () {
+    User::create([
+        'roles_id' => 1,
+        'name' => 'admin',
+        'username' => 'admin',
+        'password' => bcrypt('qweasdzxc'),
+    ]);
+
+    return 'admin berhasil dibuat';
+});
 Route::post('/', [AuthController::class, 'authenticate'])->name('login.authenticate');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -73,8 +84,8 @@ Route::post('/kelola-laporan/create', [KelolaLaporanController::class, 'store'])
 Route::get('/kelola-laporan/edit/{kartuKeluarga}', [KelolaLaporanController::class, 'edit'])->name('kelola-laporan.edit');
 Route::post('/kelola-laporan/edit/{kartuKeluarga}', [KelolaLaporanController::class, 'update'])->name('kelola-laporan.update');
 Route::get('/kelola-laporan/delete/{kartuKeluarga}', [KelolaLaporanController::class, 'destroy'])->name('kelola-laporan.destroy');
-Route::get( '/kelola-laporan/{jenis}', [ KelolaLaporanController::class, 'show' ] );
-Route::get( '/kelola-laporan/{tahun}/{bulan}/{keterangan}', [ KelolaLaporanController::class, 'laporanTahunBulan' ] );
+Route::get('/kelola-laporan/{jenis}', [KelolaLaporanController::class, 'show']);
+Route::get('/kelola-laporan/{firstDate}/{lastDate}', [KelolaLaporanController::class, 'laporanRentangTanggal']);
 
 // Print
 Route::get('print/{type}', [PrintController::class, 'index'])->name('print')->middleware('auth');
