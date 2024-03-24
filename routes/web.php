@@ -85,7 +85,7 @@ Route::get('/kelola-laporan/edit/{kartuKeluarga}', [KelolaLaporanController::cla
 Route::post('/kelola-laporan/edit/{kartuKeluarga}', [KelolaLaporanController::class, 'update'])->name('kelola-laporan.update');
 Route::get('/kelola-laporan/delete/{kartuKeluarga}', [KelolaLaporanController::class, 'destroy'])->name('kelola-laporan.destroy');
 Route::get('/kelola-laporan/{jenis}', [KelolaLaporanController::class, 'show']);
-Route::get('/kelola-laporan/{firstDate}/{lastDate}', [KelolaLaporanController::class, 'laporanRentangTanggal']);
+Route::get('/kelola-laporan/{firstDate}/{lastDate}/{keterangan}', [KelolaLaporanController::class, 'laporanRentangTanggal']);
 
 // Print
 Route::get('print/{type}', [PrintController::class, 'index'])->name('print')->middleware('auth');

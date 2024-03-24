@@ -71,7 +71,7 @@
                                             <input type="text" name="kecamatan" id="kecamatan" value="Bantarsoka"
                                                 class="w-11/12 p-2 mx-2 border border-black" disabled>
                                         </div>
-                                        <div class="grid grid-cols-2 items-center gap-10">
+                                        <div class="grid grid-cols-3 items-center gap-10">
                                             <div class="flex w-full items-center">
                                                 <label for="tahun" class="w-28">Rentang Tanggal Awal</label>
                                                 <label for="tahun" class="w-auto">:</label>
@@ -83,6 +83,21 @@
                                                 <label for="tahun" class="w-auto">:</label>
                                                 <input onchange="tampilkanLaporan()" type="date" id="last-date"
                                                     class="flex-grow p-2 mx-2 border border-black">
+                                            </div>
+                                            <div class="flex w-full items-center justify-between">
+                                                <label for="keterangan" class="">Keterangan</label>
+                                                <label for="keterangan" class="w-auto">:</label>
+                                                <select name="keterangan" id="keterangan"
+                                                    class="w-8/12 p-2 mx-2 border border-black"
+                                                    onchange="tampilkanLaporan()">
+                                                    <option value="" class="hidden">Pilih Keterangan</option>
+                                                    <option value="data-penduduk">Data Penduduk</option>
+                                                    <option value="data-kartu-keluarga">Data Kartu Keluarga</option>
+                                                    <option value="data-lahir">Data Lahir</option>
+                                                    <option value="data-meninggal">Data Meninggal</option>
+                                                    <option value="data-pendatang">Data Pendatang</option>
+                                                    <option value="data-pindah">Data Pindah</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -131,10 +146,11 @@
             function tampilkanLaporan() {
                 var firstDate = $('#first-date').val();
                 var lastDate = $('#last-date').val();
+                var keterangan = $('#keterangan').val();
 
                 $.ajax({
                     type: 'GET',
-                    url: '/kelola-laporan/' + firstDate + '/' + lastDate,
+                    url: '/kelola-laporan/' + firstDate + '/' + lastDate + '/' + keterangan,
                     success: function(data) {
                         $('#tabelLaporan').html(data);
                     },

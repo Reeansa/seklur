@@ -42,10 +42,31 @@ class KelolaLaporanController extends Controller
      * Display the specified resource.
      */
 
-    public function laporanRentangTanggal($firstDate, $lastDaet)
+    public function laporanRentangTanggal($firstDate, $lastDate, $keterangan)
     {
-        $data = Penduduk::whereBetween('created_at', [$firstDate, $lastDaet])->get();
-        return response()->view('dashboard.kelola_laporan.pages.penduduk', ['data' => $data])->getContent();
+        switch ($keterangan) {
+            case 'data-penduduk':
+                $data = Penduduk::whereBetween('created_at', [$firstDate, $lastDate])->get();
+                return response()->view('dashboard.kelola_laporan.pages.penduduk', ['data' => $data])->getContent();
+            case 'data-kartu-keluarga':
+                $data = KartuKeluarga::whereBetween('created_at', [$firstDate, $lastDate])->get();
+                return response()->view('dashboard.kelola_laporan.pages.kartuKeluarga', ['data' => $data])->getContent();
+            case 'data-lahir':
+                $data = Lahir::whereBetween('created_at', [$firstDate, $lastDate])->get();
+                return response()->view('dashboard.kelola_laporan.pages.lahir', ['data' => $data])->getContent();
+            case 'data-meninggal':
+                $data = Meninggal::whereBetween('created_at', [$firstDate, $lastDate])->get();
+                return response()->view('dashboard.kelola_laporan.pages.meninggal', ['data' => $data])->getContent();
+            case 'data-pendatang':
+                $data = Pendatang::whereBetween('created_at', [$firstDate, $lastDate])->get();
+                return response()->view('dashboard.kelola_laporan.pages.pendatang', ['data' => $data])->getContent();
+            case 'data-pindah':
+                $data = Pindah::whereBetween('created_at', [$firstDate, $lastDate])->get();
+                return response()->view('dashboard.kelola_laporan.pages.pindah', ['data' => $data])->getContent();
+            default:
+                $data = [];
+                break;
+        }
     }
 
     /**
