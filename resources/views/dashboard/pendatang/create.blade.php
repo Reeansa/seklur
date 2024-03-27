@@ -71,7 +71,7 @@
                         <div class="flex gap-2 items-center w-full justify-between">
                             <p>Pelapor</p>
                             <select name="pelapor" id="pelapor" class="w-3/4 border border-black py-2 px-4">
-                                <option value="" class="hidden" value="{{ old('pelapor') }}">-Pilih KK-</option>
+                                <option value="" class="hidden" value="{{ old('pelapor') }}">-Pilih Pelapor-</option>
                                 @foreach ($data as $id => $nama)
                                     <option value="{{ $id }}">{{ $nama }}</option>
                                 @endforeach
